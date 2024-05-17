@@ -9,6 +9,8 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 	const [time, setTime] = useState(0);
 	const [notes, setNotes] = useState(''); 
 	const { sessionData, addSessionExercise } = useContext(GlobalContext); 
+	const currentDate = new Date(); 
+	const formattedDate = currentDate.toISOString().split('T')[0]; 
 
 	const modalOff = () => {
 		console.log('modal off!');
@@ -17,7 +19,7 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 
 	const submitData = () => {
 		const newSessionExercise = {
-			date: '16/05/2024',
+			date: formattedDate,
 			exercise: exercise,
 			time: time,
 			notes: notes,

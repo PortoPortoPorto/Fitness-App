@@ -8,22 +8,18 @@ const LogSessions = () => {
 
 	const [modalToggled, setModalToggled] = useState(false); 
 
-	useEffect(() => {
-		console.log(modalToggled); 
-	}, [modalToggled]);
-
 	const modalOn = () => {
 		setModalToggled(true);
 	}
 
 	return (
 		<>
-		  <div className='bg-blue-200 h-[250px] w-[200px] rounded-xl flex-col items-end justify-between cursor-pointer'
+		  <div className='bg-blue-200 h-[275px] w-[220px] rounded-xl flex-col items-end justify-between cursor-pointer'
 		  		onClick={modalOn}>
-		  	<div className='p-2 h-[150px] w-[200px] flex items-center justify-center'>
+		  	<div className='p-2 h-[150px] w-[220px] flex items-center justify-center'>
 		  		<FontAwesomeIcon icon={faStopwatch} className='text-6xl'/>
 		  	</div>
-			<div className='p-2 h-[100px] w-[200px] flex items-end justify-center'><p className='font-semibold text-xl'>SESSIONS</p></div>
+			<div className='p-2 h-[100px] w-[220px] flex items-end justify-center'><p className='font-semibold text-2xl'>SESSIONS</p></div>
 		  </div>
 		  {modalToggled ? <SessionsModal modalToggled={modalToggled} setModalToggled={setModalToggled}/> : '' }
 		</>

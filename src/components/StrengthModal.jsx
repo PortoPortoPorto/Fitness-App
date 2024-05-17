@@ -9,6 +9,8 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 	const [reps, setReps] = useState(0); 
 	const [notes, setNotes] = useState(''); 
 	const { strengthData, addStrengthExercise } = useContext(GlobalContext); 
+	const currentDate = new Date(); 
+	const formattedDate = currentDate.toISOString().split('T')[0]; 
 
 	const modalOff = () => {
 		console.log('modal off!');
@@ -17,7 +19,7 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 
 	const submitData = () => {
 		const newStrengthExercise = {
-			date: '16/05/2024',
+			date: formattedDate,
 			exercise: exercise,
 			reps: reps,
 			notes: notes,

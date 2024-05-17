@@ -1,16 +1,35 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../context/GlobalState'; 
+import React, { useContext, useState } from 'react';
+import { GlobalContext } from '../context/GlobalState.jsx'; 
 
 const CardioCard = ({cardio}) => {
+	const { cardioData, removeCardioExercise } = useContext(GlobalContext);
+	
+	const removeExercise = (e) => {
+		console.log('removing:', cardio.exercise, 'from storage and UI'); 
+		removeCardioExercise(cardio.id); 
+	}
 
 	return (
 		<>
-		       <div className='h-[100px] w-[190px] bg-blue-200 m-1 rounded-lg'>
-		  			<p className='text-lg font-semibold p-1 flex justify-center'>{cardio.exercise}: {cardio.distance} km </p>
-		  			{cardio.notes === '' ? '' : <p className='italic p-1 flex justify-center'>{cardio.notes}</p>}
-		  	   </div> 
+		  {cardio.notes === '' ? <div className ='h-[40px] hover:bg-red-300 bg-blue-200 m-1 rounded-lg'
+		  							  onClick={removeExercise}>
+		  	   						<p className='text-lg font-semibold p-1 flex justify-center'>{cardio.exercise}: {cardio.distance} km </p>
+		  	   					 </div> : 
+		  	   					 <div className='h-[80px] hover:bg-red-300 bg-blue-200 m-1 rounded-lg'
+		  	   					      onClick={removeExercise}>
+							  		<p className='text-lg font-semibold p-1 flex justify-center'>{cardio.exercise}: {cardio.distance} km </p>
+							  		<p className='text-sm italic p-1 flex justify-center'>{cardio.notes}</p>
+							  	 </div>}
 		</>
+
+
+
+
 	)
 }
+
+				
+
+
 
 export default CardioCard

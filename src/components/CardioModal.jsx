@@ -9,6 +9,8 @@ const CardioModal = ({modalToggled, setModalToggled}) => {
 	const [distance, setDistance] = useState(0); 
 	const [notes, setNotes] = useState(''); 
 	const { cardioData, addCardioExercise } = useContext(GlobalContext);
+	const currentDate = new Date(); 
+	const formattedDate = currentDate.toISOString().split('T')[0]; 
 
 	const modalOff = () => {
 		console.log('modal off!');
@@ -17,7 +19,7 @@ const CardioModal = ({modalToggled, setModalToggled}) => {
 
 	const submitData = () => {
 		const newCardioExercise = {
-			date: '16/05/2024',
+			date: formattedDate,
 			exercise: exercise,
 			distance: distance,
 			notes: notes,

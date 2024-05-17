@@ -1,21 +1,30 @@
 import React from 'react';
-import {createContext, useReducer } from 'react';
+import {createContext, useReducer, useEffect } from 'react';
 import AppReducer from './AppReducer.jsx';
 
 //Initial State 
 
-const initialState = {
-	strengthData: [],
-	cardioData:[],
-	sessionData:[]
+const loadInitialState = () => {
+	const storedState = localStorage.getItem('appData');
+	console.log(JSON.parse(storedState)); 
+	return storedState ? JSON.parse(storedState) : {
+		strengthData: [],
+		cardioData: [],
+		sessionData: []
+	}
 }
 
 //Create Context 
-export const GlobalContext = createContext(initialState); 
+export const GlobalContext = createContext(loadInitialState()); 
 
 //Provider Component
 export const GlobalProvider = ({ children }) => {
-	const[state, dispatch] = useReducer(AppReducer, initialState); 
+	const[state, dispatch] = useReducer(AppReducer, {}, loadInitialState); 
+
+	//Update local storage whenever state changes
+	useEffect(() => {
+		localStorage.setItem('appData', JSON.stringify(state));
+	}, [state]);
 
 	//Actions 
 	const addStrengthExercise = (newStrengthExercise) => {
@@ -36,7 +45,28 @@ export const GlobalProvider = ({ children }) => {
 		dispatch({
 			type: 'ADD_SESSION_EXERCISE',
 			payload: newSessionExercise
-		})
+		});
+	}
+
+	const removeStrengthExercise = (id) => {
+		dispatch({
+			type: 'REMOVE_STRENGTH_EXERCISE',
+			payload: id
+		});
+	}
+
+	const removeCardioExercise = (id) => {
+		dispatch({
+			type: 'REMOVE_CARDIO_EXERCISE',
+			payload: id
+		});
+	}
+
+	const removeSessionExercise = (id) => {
+		dispatch({
+			type: 'REMOVE_SESSION_EXERCISE',
+			payload: id
+		});
 	}
 
 
@@ -46,7 +76,10 @@ export const GlobalProvider = ({ children }) => {
 		 sessionData: state.sessionData,
 		 addStrengthExercise,
 		 addCardioExercise,
-		 addSessionExercise
+		 addSessionExercise,
+		 removeStrengthExercise,
+		 removeCardioExercise,
+		 removeSessionExercise
 		}}>
 			{children}
 		</GlobalContext.Provider>);			

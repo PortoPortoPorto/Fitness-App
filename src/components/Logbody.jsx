@@ -20,9 +20,9 @@ const Logbody = () => {
 
 	return (
 		<>
-		  <div className='h-[700px] bg-blue-400'> 
+		  <div className='h-[720px] bg-blue-400'> 
 			<LogHeader/>
-			<div className='h-[280px] flex justify-around m-5'>
+			<div className='h-[280px] flex justify-around m-4'>
 				<LogCardio/>
 				<LogStrength/>
 				<LogSessions/>
