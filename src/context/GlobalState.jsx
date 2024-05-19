@@ -1,12 +1,11 @@
 import React from 'react';
-import {createContext, useReducer, useEffect } from 'react';
+import {createContext, useReducer, useEffect, useState } from 'react';
 import AppReducer from './AppReducer.jsx';
 
 //Initial State 
 
 const loadInitialState = () => {
 	const storedState = localStorage.getItem('appData');
-	console.log(JSON.parse(storedState)); 
 	return storedState ? JSON.parse(storedState) : {
 		strengthData: [],
 		cardioData: [],
@@ -25,6 +24,14 @@ export const GlobalProvider = ({ children }) => {
 	useEffect(() => {
 		localStorage.setItem('appData', JSON.stringify(state));
 	}, [state]);
+
+    // State to keep track of selected date 
+	const currentDate = new Date(); 
+	let formattedDate = currentDate.toISOString().split('T')[0]; 
+	const [exerciseDate, setExerciseDate] = useState(formattedDate);
+
+	// State to keep track of current view selection (byDate or viewData)
+	const [currentView, setCurrentView] = useState('byDate'); 
 
 	//Actions 
 	const addStrengthExercise = (newStrengthExercise) => {
@@ -79,7 +86,11 @@ export const GlobalProvider = ({ children }) => {
 		 addSessionExercise,
 		 removeStrengthExercise,
 		 removeCardioExercise,
-		 removeSessionExercise
+		 removeSessionExercise,
+		 exerciseDate,
+		 setExerciseDate,
+		 currentView,
+		 setCurrentView
 		}}>
 			{children}
 		</GlobalContext.Provider>);			

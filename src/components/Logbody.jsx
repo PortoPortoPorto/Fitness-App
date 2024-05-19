@@ -7,32 +7,50 @@ import LogStrength from './LogStrength.jsx';
 import LogSessions from './LogSessions.jsx'; 
 import LoggedCardio from './LoggedCardio.jsx';
 import LoggedStrength from './LoggedStrength.jsx';
-import LoggedSessions from './LoggedSessions.jsx'; 
+import LoggedSessions from './LoggedSessions.jsx';
+import SelectCardio from './SelectCardio.jsx';
+import SelectStrength from './SelectStrength.jsx'; 
+import SelectSessions from './SelectSessions.jsx'; 
+import DataHeader from './DataHeader.jsx'; 
+
 
 
 const Logbody = () => {
-	const { strengthData, cardioData, sessionData } = useContext(GlobalContext); 
+	const { strengthData, cardioData, sessionData, currentView } = useContext(GlobalContext); 
 
 	useEffect(() => {
-		console.log(strengthData);
+		console.log(strengthData, cardioData, sessionData);
 	}, [strengthData, cardioData, sessionData]);
+
 
 
 	return (
 		<>
-		  <div className='h-[720px] bg-blue-400'> 
-			<LogHeader/>
-			<div className='h-[280px] flex justify-around m-4'>
-				<LogCardio/>
-				<LogStrength/>
-				<LogSessions/>
-			</div>
-			<div className='h-[280px] flex justify-around m-5'>
-				<LoggedCardio/>
-				<LoggedStrength/>
-				<LoggedSessions/>
-			</div>
-		  </div>
+		 	{currentView === 'byDate' ?
+		 	  <>
+			  <div className='h-[720px] bg-blue-400'> 
+				<LogHeader/>
+				<div className='h-[280px] flex justify-around m-4'>
+					<LogCardio/>
+					<LogStrength/>
+					<LogSessions/>
+				</div>
+				<div className='h-[280px] flex justify-around m-5'>
+					<LoggedCardio/>
+					<LoggedStrength/>
+					<LoggedSessions/>
+				</div>
+			  </div>
+			  </> 
+			: 
+			  <div className='h-[720px] bg-blue-400'> 
+			 	<DataHeader/>
+				<div className='h-[400px] flex justify-around m-4'>
+					<SelectCardio/>
+					<SelectStrength/>
+					<SelectSessions/>
+				</div>			 	
+			  </div> }
 		</>
 	)
 }

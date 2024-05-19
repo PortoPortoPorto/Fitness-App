@@ -4,29 +4,16 @@ import { GlobalContext } from '../context/GlobalState.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPersonRunning} from '@fortawesome/free-solid-svg-icons';
 
-const CardioModal = ({modalToggled, setModalToggled}) => {
-	const [exercise, setExercise] = useState('Running'); 
-	const [distance, setDistance] = useState(0); 
-	const [notes, setNotes] = useState(''); 
-	const { cardioData, addCardioExercise, exerciseDate } = useContext(GlobalContext);
+const DataModal = ({ dataModalToggled, setDataModalToggled }) => {
+	const [dateRange, setDateRange] = useState(''); 
 
-	const modalOff = () => {
-		console.log('modal off!');
-		setModalToggled(false);  
+	const dataModalOff = () => {
+		setDataModalToggled(false); 
 	}
 
-	const submitData = () => {
-		const newCardioExercise = {
-			date: exerciseDate,
-			exercise: exercise,
-			distance: distance,
-			notes: notes,
-			id: cardioData.length + 1
-		}
-		addCardioExercise(newCardioExercise); 
-		modalOff(); 
+	const dateRangeSelect = (e) => {
+		console.log(e); 
 	}
-
 
 	return (
 			/* HTML */
@@ -50,36 +37,33 @@ const CardioModal = ({modalToggled, setModalToggled}) => {
 			          </div>
 			          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
 			            <h3 className="text-lg leading-6 font-semibold text-gray-900" id="modal-title">
-			              Select Cardio Exercise
+			              Select Data Range
 			            </h3>
 			            {/*  Modal Description */}
-			            <div className="mt-2 h-[240px] w-[350px] flex flex-col items-around justify-around">
+			            <div className="mt-4 h-[200px] w-[350px] flex flex-col items-around justify-around">
 			              <div className="h-[60px] flex items-center justify-around">
-			              	<p className="text-medium font-semibold p-2">Type</p>
-			        		<select className='h-[50px] w-[150px] border border-blue-100 rounded-md' 
-			        				placeholder='Select Exercise'
-			        				onClick={(e) => setExercise(e.target.value)}>
-			        			<option>Running</option>
-			        			<option>Swimming</option>
-			        			<option>Cycling</option>
-			        			<option>Jump Rope</option>
-			        			<option>Walking</option>
-			        		</select>		        				
+			              	<button className ='bg-blue-100 rounded-lg h-[50px] w-[150px] border-solid border-blue-400 
+			              						border text-lg font-semibold hover:border-blue-100 hover:bg-blue-300 
+			              						focus:bg-blue-300 focus:border-blue-100'
+			              			onClick={dateRangeSelect('1 week')}>
+			              		1 week
+			              	</button>	        				
 			              </div>
 			              <div className="h-[60px] flex items-center justify-around">
-			              	<p className="text-medium font-semibold p-2">Total Distance</p>
-			              	<input className='h-[50px] w-[135px] rounded-md p-2' type='text' 
-			              		   placeholder='enter distance'
-			              		   onChange={(e) => setDistance(e.target.value)}>		              		   				              		   	
-			              	</input>
-			              	<p className="text-medium font-semibold">Km</p>
-			              </div>
-			              <div className="h-[80px] flex items-center justify-around">
-			              	<p className="text-medium font-semibold p-2">Notes</p>
-			              	<input className='h-[80px] rounded-md p-2' type='text' 
-			              		   placeholder='enter notes'
-			              		   onChange={(e) => setNotes(e.target.value)}> 
-			              	</input>
+			              	<button className ='bg-blue-100 rounded-lg h-[50px] w-[150px] border-solid border-blue-400 
+			              						border text-lg font-semibold hover:border-blue-100 hover:bg-blue-300
+			              						focus:bg-blue-300 focus:border-blue-100'
+			              			onClick={dateRangeSelect('1 month')}>
+			              		1 month
+			              	</button>
+				          </div>
+			              <div className="h-[60px] flex items-center justify-around">
+			              	<button className ='bg-blue-100 rounded-lg h-[50px] w-[150px] border-solid border-blue-400 
+			              						border text-lg font-semibold hover:border-blue-100 hover:bg-blue-300
+			              						focus:bg-blue-300 focus:border-blue-100'
+			              			onClick={dateRangeSelect('3 months')}>
+			              		3 months
+			              	</button>
 			              </div>
 			            </div>
 			          </div>
@@ -92,15 +76,16 @@ const CardioModal = ({modalToggled, setModalToggled}) => {
 			        		border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium 
 			        		text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
 			        		focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
-			        		onClick={submitData}>
+			        		>
 			          Accept
 			        </button>
 			        <button type="button" 
 			        		className="mt-3 w-full inline-flex justify-center rounded-md border 
 			        		border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 
-			        		hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 
+			        		hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 
 			        		sm:mt-0 sm:w-auto sm:text-sm"
-			        		onClick={modalOff}>
+			        		onClick={dataModalOff}
+			        		>
 			          Cancel
 			        </button>
 			      </div>
@@ -108,6 +93,6 @@ const CardioModal = ({modalToggled, setModalToggled}) => {
 			  </div>
 			</div>
 		)
-	}
+}
 
-export default CardioModal
+export default DataModal
