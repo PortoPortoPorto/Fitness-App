@@ -5,7 +5,7 @@ const NavOptions = () => {
 	const { currentView, setCurrentView } = useContext(GlobalContext); 
 
 	const changeView = () => {
-		setCurrentView('viewData');
+		setCurrentView('dataSelect');
 	}
 
 	return (

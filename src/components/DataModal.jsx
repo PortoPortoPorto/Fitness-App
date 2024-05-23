@@ -2,17 +2,27 @@ import React from 'react';
 import {useState, useEffect, useContext} from 'react';
 import { GlobalContext } from '../context/GlobalState.jsx';  
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPersonRunning} from '@fortawesome/free-solid-svg-icons';
+import {faPersonRunning, faStopwatch, faDumbbell} from '@fortawesome/free-solid-svg-icons';
 
-const DataModal = ({ dataModalToggled, setDataModalToggled }) => {
-	const [dateRange, setDateRange] = useState(''); 
+const DataModal = ({ dataModalToggled, setDataModalToggled, keyNumber}) => {
+	const { currentView, setCurrentView, currentDataCat, setCurrentDataCat, dateRange, setDateRange } = useContext(GlobalContext); 
 
 	const dataModalOff = () => {
-		setDataModalToggled(false); 
+		setDataModalToggled(false);
 	}
 
 	const dateRangeSelect = (e) => {
-		console.log(e); 
+		setDateRange(e); 
+	}
+
+	useEffect(() => {
+		console.log('date range set at:', dateRange); 
+	}, [dateRange]);
+
+	const changeView = () => {
+		setCurrentDataCat(keyNumber); 
+		setCurrentView('viewData');
+		dataModalOff(); 
 	}
 
 	return (
@@ -33,7 +43,8 @@ const DataModal = ({ dataModalToggled, setDataModalToggled }) => {
 			        <div className="sm:flex sm:items-start">
 			          <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
 			            {/*  Icon Here */}
-			            <FontAwesomeIcon icon={faPersonRunning} className='text-4xl'/>
+			            {keyNumber > 2 ? (<FontAwesomeIcon icon={faStopwatch} className='text-4xl'/>) : keyNumber > 1 ? (
+			            	<FontAwesomeIcon icon={faDumbbell} className='text-4xl'/>) : (<FontAwesomeIcon icon={faPersonRunning} className='text-4xl'/>)} 
 			          </div>
 			          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
 			            <h3 className="text-lg leading-6 font-semibold text-gray-900" id="modal-title">
@@ -45,7 +56,7 @@ const DataModal = ({ dataModalToggled, setDataModalToggled }) => {
 			              	<button className ='bg-blue-100 rounded-lg h-[50px] w-[150px] border-solid border-blue-400 
 			              						border text-lg font-semibold hover:border-blue-100 hover:bg-blue-300 
 			              						focus:bg-blue-300 focus:border-blue-100'
-			              			onClick={dateRangeSelect('1 week')}>
+			              			onClick={() => dateRangeSelect('1 week')}>
 			              		1 week
 			              	</button>	        				
 			              </div>
@@ -53,7 +64,7 @@ const DataModal = ({ dataModalToggled, setDataModalToggled }) => {
 			              	<button className ='bg-blue-100 rounded-lg h-[50px] w-[150px] border-solid border-blue-400 
 			              						border text-lg font-semibold hover:border-blue-100 hover:bg-blue-300
 			              						focus:bg-blue-300 focus:border-blue-100'
-			              			onClick={dateRangeSelect('1 month')}>
+			              			onClick={() => dateRangeSelect('1 month')}>
 			              		1 month
 			              	</button>
 				          </div>
@@ -61,7 +72,7 @@ const DataModal = ({ dataModalToggled, setDataModalToggled }) => {
 			              	<button className ='bg-blue-100 rounded-lg h-[50px] w-[150px] border-solid border-blue-400 
 			              						border text-lg font-semibold hover:border-blue-100 hover:bg-blue-300
 			              						focus:bg-blue-300 focus:border-blue-100'
-			              			onClick={dateRangeSelect('3 months')}>
+			              			onClick={() => dateRangeSelect('3 months')}>
 			              		3 months
 			              	</button>
 			              </div>
@@ -76,6 +87,7 @@ const DataModal = ({ dataModalToggled, setDataModalToggled }) => {
 			        		border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium 
 			        		text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
 			        		focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+			        		onClick={changeView}
 			        		>
 			          Accept
 			        </button>

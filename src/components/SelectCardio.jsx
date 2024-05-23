@@ -13,7 +13,6 @@ const LogCardio = () => {
 	}
 
 
-
 	return (
 		<>
 		  <div className='bg-blue-200 hover:bg-blue-100 hover:text-blue-400 h-[400px] w-[300px] rounded-xl flex-col items-end justify-between cursor-pointer'
@@ -23,7 +22,7 @@ const LogCardio = () => {
 		  	</div>
 			<div className='p-2 h-[130px] w-[300px] flex items-end justify-center'><p className='font-semibold text-2xl'>CARDIO</p></div>
 		  </div>
-		  {dataModalToggled ? <DataModal dataModalToggled={dataModalToggled} setDataModalToggled={setDataModalToggled}/> : '' }
+		  {dataModalToggled ? <DataModal dataModalToggled={dataModalToggled} setDataModalToggled={setDataModalToggled} keyNumber={1}/> : '' }
 		</>
 
 	)

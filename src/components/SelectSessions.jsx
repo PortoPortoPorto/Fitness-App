@@ -2,15 +2,16 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStopwatch} from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
-import SessionsModal from './SessionsModal.jsx'; 
+import DataModal from './DataModal.jsx'; 
 
 const LogSessions = () => {
 
-	const [modalToggled, setModalToggled] = useState(false); 
+	const [dataModalToggled, setDataModalToggled] = useState(false); 
 
 	const modalOn = () => {
-		setModalToggled(true);
+		setDataModalToggled(true);
 	}
+
 
 	return (
 		<>
@@ -21,7 +22,7 @@ const LogSessions = () => {
 		  	</div>
 			<div className='p-2 h-[130px] w-[300px] flex items-end justify-center'><p className='font-semibold text-2xl'>SESSIONS</p></div>
 		  </div>
-		  {modalToggled ? <SessionsModal modalToggled={modalToggled} setModalToggled={setModalToggled}/> : '' }
+		  {dataModalToggled ? <DataModal dataModalToggled={dataModalToggled} setDataModalToggled={setDataModalToggled} keyNumber={3}/> : '' }
 		</>
 	)
 }

@@ -30,8 +30,14 @@ export const GlobalProvider = ({ children }) => {
 	let formattedDate = currentDate.toISOString().split('T')[0]; 
 	const [exerciseDate, setExerciseDate] = useState(formattedDate);
 
-	// State to keep track of current view selection (byDate or viewData)
+	// State to keep track of current view selection (byDate, dataSelect, or viewData)
 	const [currentView, setCurrentView] = useState('byDate'); 
+
+	//State to keep track of data category to view in viewData (cardio, strength, session)
+	const [currentDataCat, setCurrentDataCat] = useState('')
+
+	//State to keep track of date range selected when viewing data (weekly, monthly, quarterly)
+	const [dateRange, setDateRange] = useState(''); 
 
 	//Actions 
 	const addStrengthExercise = (newStrengthExercise) => {
@@ -90,7 +96,11 @@ export const GlobalProvider = ({ children }) => {
 		 exerciseDate,
 		 setExerciseDate,
 		 currentView,
-		 setCurrentView
+		 setCurrentView,
+		 currentDataCat,
+		 setCurrentDataCat,
+		 dateRange,
+		 setDateRange
 		}}>
 			{children}
 		</GlobalContext.Provider>);			

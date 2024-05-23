@@ -11,7 +11,11 @@ import LoggedSessions from './LoggedSessions.jsx';
 import SelectCardio from './SelectCardio.jsx';
 import SelectStrength from './SelectStrength.jsx'; 
 import SelectSessions from './SelectSessions.jsx'; 
+import DataSelectHeader from './DataSelectHeader.jsx'; 
 import DataHeader from './DataHeader.jsx'; 
+import DataTotals from './DataTotals.jsx';
+import DataAverages from './DataAverages.jsx';
+import DataChanges from './DataChanges.jsx'; 
 
 
 
@@ -25,32 +29,42 @@ const Logbody = () => {
 
 
 	return (
-		<>
-		 	{currentView === 'byDate' ?
-		 	  <>
-			  <div className='h-[720px] bg-blue-400'> 
-				<LogHeader/>
-				<div className='h-[280px] flex justify-around m-4'>
-					<LogCardio/>
-					<LogStrength/>
-					<LogSessions/>
-				</div>
-				<div className='h-[280px] flex justify-around m-5'>
-					<LoggedCardio/>
-					<LoggedStrength/>
-					<LoggedSessions/>
-				</div>
-			  </div>
-			  </> 
-			: 
-			  <div className='h-[720px] bg-blue-400'> 
-			 	<DataHeader/>
-				<div className='h-[400px] flex justify-around m-4'>
-					<SelectCardio/>
-					<SelectStrength/>
-					<SelectSessions/>
-				</div>			 	
-			  </div> }
+		<>{/* View Daily Log / Data Select Options / Data View Options*/}
+		 	{currentView === 'byDate' ? (		
+				  <div className='h-[720px] bg-blue-400'> 
+					<LogHeader/>
+					<div className='h-[280px] flex justify-around m-4'>
+						<LogCardio/>
+						<LogStrength/>
+						<LogSessions/>
+					</div>
+					<div className='h-[280px] flex justify-around m-5'>
+						<LoggedCardio/>
+						<LoggedStrength/>
+						<LoggedSessions/>
+					</div>
+				  </div>
+	 			)
+
+				: currentView === 'dataSelect' ? (
+				  <div className='h-[720px] bg-blue-400'> 
+				 	<DataSelectHeader/>
+					<div className='h-[400px] flex justify-around m-4'>
+						<SelectCardio/>
+						<SelectStrength/>
+						<SelectSessions/>
+					</div>			 	
+				  </div>) 
+
+				: (	<div className='h-[720px] bg-blue-400'> 
+				 	<DataHeader/>	
+					<div className='flex m-4 p-4'>	
+					 	<DataTotals/>
+					 	<DataAverages/>
+					 	<DataChanges/> 
+					</div>
+				  </div>) 
+		    } 		  
 		</>
 	)
 }

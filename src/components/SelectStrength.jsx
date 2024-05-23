@@ -2,14 +2,14 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faDumbbell} from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
-import StrengthModal from './StrengthModal.jsx';
+import DataModal from './DataModal.jsx'; 
 
 const LogStrength = () => {
 
-	const [modalToggled, setModalToggled] = useState(false); 
+	const [dataModalToggled, setDataModalToggled] = useState(false); 
 
 	const modalOn = () => {
-		setModalToggled(true);
+		setDataModalToggled(true);
 	}
 
 
@@ -22,7 +22,7 @@ const LogStrength = () => {
 		  	</div>
 			<div className='p-2 h-[130px] w-[300px] flex items-end justify-center'><p className='font-semibold text-2xl'>STRENGTH</p></div>
 		  </div>
-		  {modalToggled ? <StrengthModal modalToggled={modalToggled} setModalToggled={setModalToggled}/> : '' }
+		  {dataModalToggled ? <DataModal dataModalToggled={dataModalToggled} setDataModalToggled={setDataModalToggled} keyNumber={2}/> : '' }
 		</>
 
 	)

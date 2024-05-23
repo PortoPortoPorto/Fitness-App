@@ -30,13 +30,17 @@ const NavDate = () => {
 
 	return (
 		<>
-		  <div className='border border-blue-200 rounded-md h-12 w-96 flex items-center justify-around cursor-pointer hover:bg-blue-200'>
+		  {currentView === 'byDate'? <div className='border border-blue-200 rounded-md h-12 w-96 flex items-center justify-around cursor-pointer hover:bg-blue-200'>
 			<FontAwesomeIcon icon="fa-solid fa-chevron-left" className= 'text-3xl text-blue-100 hover:text-blue-400 hover:text-4xl'
 							 onClick={previousDate}/>
 			<p className='text-xl font-semibold' onClick={changeView}>{exerciseDate}</p>
 			<FontAwesomeIcon icon="fa-solid fa-chevron-right" className= 'text-3xl text-blue-100 hover:text-blue-400 hover:text-4xl'
 			 				 onClick={nextDate}/>
-		  </div>	
+		  </div> 
+		 : 
+		  <div className='border border-blue-200 rounded-md h-12 w-96 flex items-center justify-around cursor-pointer hover:bg-blue-200'>
+			<p className='text-xl font-semibold' onClick={changeView}>{exerciseDate}</p>
+		  </div> }	
 		</>
 	)
 }
