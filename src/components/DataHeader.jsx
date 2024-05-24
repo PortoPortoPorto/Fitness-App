@@ -3,9 +3,8 @@ import { GlobalContext } from '../context/GlobalState.jsx';
 
 
 const DataHeader = () => {
-	const { currentDataCat, dateRange } = useContext(GlobalContext); 
+	const { currentDataCat, dateRange, startingDate, setStartingDate } = useContext(GlobalContext); 
 	const [ dataDate, setDataDate ] = useState('');
-	const [ startingDate, setStartingDate] = useState(''); 
 
 	const newDataDate = () => {
 		let todayDate = new Date();

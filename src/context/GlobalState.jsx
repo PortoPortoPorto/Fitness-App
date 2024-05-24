@@ -39,6 +39,9 @@ export const GlobalProvider = ({ children }) => {
 	//State to keep track of date range selected when viewing data (weekly, monthly, quarterly)
 	const [dateRange, setDateRange] = useState(''); 
 
+	//State to keep track of starting date, determined by date range selection
+	const [ startingDate, setStartingDate] = useState(''); 
+
 	//Actions 
 	const addStrengthExercise = (newStrengthExercise) => {
 		dispatch({
@@ -100,7 +103,9 @@ export const GlobalProvider = ({ children }) => {
 		 currentDataCat,
 		 setCurrentDataCat,
 		 dateRange,
-		 setDateRange
+		 setDateRange,
+		 startingDate,
+		 setStartingDate
 		}}>
 			{children}
 		</GlobalContext.Provider>);			

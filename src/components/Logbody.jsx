@@ -13,19 +13,12 @@ import SelectStrength from './SelectStrength.jsx';
 import SelectSessions from './SelectSessions.jsx'; 
 import DataSelectHeader from './DataSelectHeader.jsx'; 
 import DataHeader from './DataHeader.jsx'; 
-import DataTotals from './DataTotals.jsx';
-import DataAverages from './DataAverages.jsx';
-import DataChanges from './DataChanges.jsx'; 
+import DataBody from './DataBody.jsx';
 
 
 
 const Logbody = () => {
 	const { strengthData, cardioData, sessionData, currentView } = useContext(GlobalContext); 
-
-	useEffect(() => {
-		console.log(strengthData, cardioData, sessionData);
-	}, [strengthData, cardioData, sessionData]);
-
 
 
 	return (
@@ -58,11 +51,7 @@ const Logbody = () => {
 
 				: (	<div className='h-[720px] bg-blue-400'> 
 				 	<DataHeader/>	
-					<div className='flex m-4 p-4'>	
-					 	<DataTotals/>
-					 	<DataAverages/>
-					 	<DataChanges/> 
-					</div>
+					<DataBody/>
 				  </div>) 
 		    } 		  
 		</>

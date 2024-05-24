@@ -1,48 +1,44 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState'; 
 
-const DataTotals = () => {
-	const { strengthData, cardioData, sessionData, currentDataCat, dateRange } = useContext(GlobalContext); 
-	const [ dataCat, setDataCat ] = useState('');
-	const [ pushups, setPushups ] = useState('');
-	
-	const findDataCat = () => {
-		if(currentDataCat === 1)setDataCat(cardioData);
-		if(currentDataCat === 2)setDataCat(strengthData);
-		if(currentDataCat === 3)setDataCat(sessionData);
-	}
+const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
+	const {  currentDataCat } = useContext(GlobalContext); 
 
-	const organiseData = () => {
-		let pushupsArray = strengthData.filter((d) => d.exercise === 'Pushups');
-		let repsArray = pushupsArray.map((p) => p.reps);
-		let parsedRepsArray = repsArray.map(r => parseInt(r));
-		let totalPushups = parsedRepsArray.reduce((acc, current) => acc + current, 0);
-		setPushups(totalPushups); 
-	}
+	console.log(currentDataCat);
+	console.log(strengthObject);
 
-	useEffect(() => {
-		findDataCat(); 
-		console.log('strength data:', strengthData);
-	}, []);
-
-	useEffect(() => {
-		organiseData(); 
-	}, [dataCat]);
+	const divClass = 'h-[80px] w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'; 
 
 	return (
 		<>
-		  <div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
-			<h1 className='p-2 text-lg font-semibold'>TOTALS</h1>	
-				{dataCat === cardioData ? 
-				(<div>CARDIO BITCH</div>) 
-			
-				: dataCat === strengthData ? 
-				(<div className='p-3 text-2xl font-semibold flex flex-col items-center'>PUSHUPS
-					<div>{pushups}</div> 
-				</div>) 
-
-				: (<div>SESSIONS BITCH</div>)}
-		  </div>
+		  { currentDataCat > 2 ? 
+		  	 (<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
+				<h1 className='p-2 text-lg font-semibold'>TOTALS</h1>	
+					{ sessionObject.yoga > 0 ? <div className={divClass}> YOGA: {sessionObject.yoga} mins</div> : ''}
+					{ sessionObject.pilates > 0 ? <div className={divClass}>PILATES : {sessionObject.pilates} mins</div> : ''}
+					{ sessionObject.spin > 0 ? <div className={divClass} >SPIN: {sessionObject.spin} mins</div> : ''}
+					{ sessionObject.zumba > 0 ? <div className={divClass}>ZUMBA: {sessionObject.zumba} mins</div> : ''}
+					{ sessionObject.boxing > 0 ? <div className={divClass}>BOXING: {sessionObject.boxing} mins</div> : ''}
+			  	</div>)
+		  	:
+		    currentDataCat > 1 ?	 
+			  	(<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
+				<h1 className='p-2 text-lg font-semibold'>TOTALS</h1>	
+					{ strengthObject.pushups > 0 ? <div className={divClass}> PUSHUPS: {strengthObject.pushups}</div> : ''}
+					{ strengthObject.squats > 0 ? <div className={divClass}>SQUATS : {strengthObject.squats}</div> : ''}
+					{ strengthObject.lunges > 0 ? <div className={divClass}>LUNGES: {strengthObject.lunges}</div> : ''}
+					{ strengthObject.presses > 0 ? <div className={divClass}>PRESSES: {strengthObject.presses}</div> : ''}
+					{ strengthObject.curls > 0 ? <div className={divClass}>CURLS: {strengthObject.curls}</div> : ''}
+			  	</div>)
+			:   
+				(<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
+					<h1 className='p-2 text-lg font-semibold'>TOTALS</h1>	
+					{ cardioObject.running > 0 ? <div className={divClass}>RUNNING: {cardioObject.running} km</div> : ''}
+					{ cardioObject.swimming > 0 ? <div className={divClass}>SWIMMING : {cardioObject.swimming} km</div> : ''}
+					{ cardioObject.cycling > 0 ? <div className={divClass}>CYCLING: {cardioObject.cycling} km</div> : ''}
+					{ cardioObject.rope> 0 ? <div className={divClass}>ROPE : {cardioObject.rope} mins</div> : ''}
+					{ cardioObject.walking > 0 ? <div className={divClass}>WALKING: {cardioObject.walking} km</div> : ''}
+			  </div>)}
 		</>
 	)
 }
