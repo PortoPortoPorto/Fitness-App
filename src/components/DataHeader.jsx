@@ -25,7 +25,6 @@ const DataHeader = () => {
 
 	useEffect(() => {
 		newDataDate(); 
-		console.log(dateRange); 
 		findStartDate();
 	}, []);
 

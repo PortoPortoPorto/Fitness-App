@@ -11,30 +11,30 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 		  { currentDataCat > 2 ? 
 		  	 (<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
 				<h1 className='p-2 text-lg font-semibold'>AVERAGES</h1>	
-					{ sessionObject.yoga > 0 ? <div className={divClass}> YOGA: {Math.round(sessionObject.yoga / days)} mins per day</div> : ''}
-					{ sessionObject.pilates > 0 ? <div className={divClass}>PILATES : {Math.round(sessionObject.pilates / days)} mins per day</div> : ''}
-					{ sessionObject.spin > 0 ? <div className={divClass} >SPIN: {Math.round(sessionObject.spin / days)} mins per day</div> : ''}
-					{ sessionObject.zumba > 0 ? <div className={divClass}>ZUMBA: {Math.round(sessionObject.zumba / days)} mins per day</div> : ''}
-					{ sessionObject.boxing > 0 ? <div className={divClass}>BOXING: {Math.round(sessionObject.boxing / days)} mins per day</div> : ''}
+					{ sessionObject.Yoga > 0 ? <div className={divClass}> Yoga: {Math.round(sessionObject.Yoga / days)} mins per day</div> : ''}
+					{ sessionObject.Pilates > 0 ? <div className={divClass}>Pilates : {Math.round(sessionObject.Pilates / days)} mins per day</div> : ''}
+					{ sessionObject.Spin > 0 ? <div className={divClass} >Spin: {Math.round(sessionObject.Spin / days)} mins per day</div> : ''}
+					{ sessionObject.Zumba> 0 ? <div className={divClass}>ZUMBA: {Math.round(sessionObject.Zumba/ days)} mins per day</div> : ''}
+					{ sessionObject.Boxing > 0 ? <div className={divClass}>Boxing: {Math.round(sessionObject.Boxing / days)} mins per day</div> : ''}
 			  	</div>)
 		  	:
 		    currentDataCat > 1 ?	 
 			  	(<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
 				<h1 className='p-2 text-lg font-semibold'>AVERAGES</h1>	
-					{ strengthObject.pushups > 0 ? <div className={divClass}> PUSHUPS: {Math.round(strengthObject.pushups / days)} per day</div> : ''}
-					{ strengthObject.squats > 0 ? <div className={divClass}>SQUATS : {Math.round(strengthObject.squats / days)} per day</div> : ''}
-					{ strengthObject.lunges > 0 ? <div className={divClass}>LUNGES: {Math.round(strengthObject.lunges / days)} per day</div> : ''}
-					{ strengthObject.presses > 0 ? <div className={divClass}>PRESSES: {Math.round(strengthObject.presses / days)} per day</div> : ''}
-					{ strengthObject.curls > 0 ? <div className={divClass}>CURLS: {Math.round(strengthObject.curls / days)} per day</div> : ''}
+					{ strengthObject.Pushups > 0 ? <div className={divClass}> Pushups: {Math.round(strengthObject.Pushups / days)} per day</div> : ''}
+					{ strengthObject.Squats > 0 ? <div className={divClass}>Squats : {Math.round(strengthObject.Squats / days)} per day</div> : ''}
+					{ strengthObject.Lunges > 0 ? <div className={divClass}>Lunges: {Math.round(strengthObject.Lunges / days)} per day</div> : ''}
+					{ strengthObject.Presses > 0 ? <div className={divClass}>Presses: {Math.round(strengthObject.Presses / days)} per day</div> : ''}
+					{ strengthObject.Curls > 0 ? <div className={divClass}>Curls: {Math.round(strengthObject.Curls / days)} per day</div> : ''}
 			  	</div>)
 			:   
 				(<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
 					<h1 className='p-2 text-lg font-semibold'>AVERAGES</h1>	
-					{ cardioObject.running > 0 ? <div className={divClass}>RUNNING: {Math.round(cardioObject.running / days)} km / day</div> : ''}
-					{ cardioObject.swimming > 0 ? <div className={divClass}>SWIMMING : {Math.round(cardioObject.swimming / days)} km / day</div> : ''}
-					{ cardioObject.cycling > 0 ? <div className={divClass}>CYCLING: {Math.round(cardioObject.cycling / days)} km / day</div> : ''}
-					{ cardioObject.rope> 0 ? <div className={divClass}>ROPE : {Math.round(cardioObject.rope / days)} mins / day</div> : ''}
-					{ cardioObject.walking > 0 ? <div className={divClass}>WALKING: {Math.round(cardioObject.walking / days)} km / day</div> : ''}
+					{ cardioObject.Running > 0 ? <div className={divClass}>Running: {Math.round(cardioObject.Running / days)} km / day</div> : ''}
+					{ cardioObject.Swimming > 0 ? <div className={divClass}>Swimming : {Math.round(cardioObject.Swimming / days)} km / day</div> : ''}
+					{ cardioObject.Cycling > 0 ? <div className={divClass}>Cycling: {Math.round(cardioObject.Cycling / days)} km / day</div> : ''}
+					{ cardioObject.Rope> 0 ? <div className={divClass}>Rope : {Math.round(cardioObject.Rope / days)} mins / day</div> : ''}
+					{ cardioObject.Walking > 0 ? <div className={divClass}>Walking: {Math.round(cardioObject.Walking / days)} km / day</div> : ''}
 			  </div>)}
 		</>
 	)
