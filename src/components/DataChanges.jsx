@@ -35,7 +35,7 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 //Filter data array to only contain objects within date range (using compareDates as start and end point)
 	const filterComparisonArray = () => {
 		let filteredCompObject = dataCat.filter((d) => d.date >= compareDates[0] && d.date <= compareDates[1]);
-//Set data into dataShell of whichever is the current data category 
+//Set data into dataShell of whichever is the current data category. Use as argument for setPastData
 		if(currentDataCat === 1) {
 			filteredCompObject = organisePastCardio(filteredCompObject);
 		} else if(currentDataCat === 2) {
@@ -57,7 +57,7 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 
 	}
 
-
+//push past data from filterComparisonArray function to pastStrengthObject. Return value to filterComparisonArray function 
 	const organisePastStrength = (filteredCompObject) => {
 		console.log('organising past strength:', filteredCompObject);
 		let pastStrengthObject = {
@@ -82,26 +82,44 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 		console.log('organising past sessions');
 	}	
 
-//Function to compare current exercise data array with previous exercise data array 
-	const compareArrays = () => {
+
+	const compareCardioArrays = () => {
+		console.log('comparing cardio arrays');
+	}
+
+
+//Function to compare current exercise data array with previous exercise data array. Triggered by change in pastData useState
+	const compareStrengthArrays = () => {
 		const exerciseArray = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls'];
 		let resultsArray = [];
 //loop through each category, comparing numbers of current and past exercies periods. If there is a difference, push as object to resultsArray 
 		for(let i = 0; i < exerciseArray.length; i ++) {
 			let cat = exerciseArray[i];
 			let result = strengthObject[`${cat}`] - pastData[`${cat}`];
-			if(result !== 0) {
+			if(result < 0) {
 				const changeObject = {
 					name: cat,
 					result: result
 				}
-				console.log(changeObject);
 				resultsArray.push(changeObject);
 			}
+			 if(result > 0) {
+				const changeObject = {
+					name: cat,
+					result: result
+				}
+					resultsArray.push(changeObject);
+			}					
 		}
 		console.log(resultsArray);
 		setProgressArray(resultsArray);
 	}
+
+
+	const compareSessionArrays = () => {
+		console.log('comparing session arrays');
+	}
+
 
 	useEffect(() => {
 		datesToCompare();
@@ -116,16 +134,24 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 
 	useEffect(() => {
 		if(pastData === '')return;
-		compareArrays();
+		if(currentDataCat === 1)compareCardioArrays();
+		if(currentDataCat === 2)compareStrengthArrays();
+		if(currentDataCat === 3)compareSessionArrays(); 
 	}, [pastData]);
 
-	const divClass = 'h-[80px] w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'; 
+
+	const divClassPlus = 'h-[80px] w-[350px] bg-green-200 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'; 
+	const divClassMinus = 'h-[80px] w-[350px] bg-red-200 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'; 
 
 	return (
 		<>
 		<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
 			<h1 className='p-2 text-lg font-semibold'>PROGRESS</h1>
 			<div className='text-blue-300 italic font-semibold'>vs previous {dateRange}</div>
+			{ progressArray.length !== 0 ?
+				(progressArray.map(a => (<div className={ a.result > 0 ? divClassPlus : divClassMinus} key={a.name}> {a.name} {a.result}  </div>))
+				) : (<div className='h-[400px] w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'>No Changes!</div>) 
+			}
 		</div>
 		</>
 	)
