@@ -36,98 +36,71 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 	const filterComparisonArray = () => {
 		let filteredCompObject = dataCat.filter((d) => d.date >= compareDates[0] && d.date <= compareDates[1]);
 //Set data into dataShell of whichever is the current data category. Use as argument for setPastData
-		if(currentDataCat === 1) {
-			filteredCompObject = organisePastCardio(filteredCompObject);
-		} else if(currentDataCat === 2) {
-			filteredCompObject = organisePastStrength(filteredCompObject);
-		} else if(currentDataCat === 3) {
-			filteredCompObject = organisePastSessions(filteredCompObject);
-		}
-
-
+		filteredCompObject = organisePast(filteredCompObject);
 		setPastData(filteredCompObject);
 	}
 
-//Organise Data of filtered past activities (cardio, strength, session), reduce to single value (time/distance/reps) and push into shell object for comparison 
 
-	const organisePastCardio = (filteredCompObject) => {
-		console.log('organising past cardio');
-		let pastCardioObject = {
-			Running: [],
-			Swimming: [],
-			Cycling: [],
-			JumpRope: [],
-			Walking: []
-		}
+//Organise Data of filtered past activities (cardio/strength/session), reduce to single value (time/distance/reps) and push into shell object for comparison 
+	const organisePast = (filteredCompObject) => {
+		if(currentDataCat === 1) {
+			let pastObject = {
+				Running: [],
+				Swimming: [],
+				Cycling: [],
+				JumpRope: [],
+				Walking: []
+			}
+			const exerciseArray = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking'];
+			const filteredPastObject = filterPastObject(pastObject, exerciseArray, 'distance', filteredCompObject);
+			return filteredPastObject; 
 
-		const exerciseArray = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking'];
-		for(let i = 0; i < exerciseArray.length; i ++) {
-			let filteredCat = filteredCompObject.filter((d) => d.exercise === exerciseArray[i]).map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-			let cat = exerciseArray[i];
-			pastCardioObject[`${cat}`].push(filteredCat);
-		}
-		return pastCardioObject;	
+		} else if (currentDataCat === 2) {
+			let pastObject = {
+				Pushups: [],
+				Squats: [],
+				Lunges: [],
+				Presses: [],
+				Curls: []
+			}
+			const exerciseArray = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls'];
+			const filteredPastObject = filterPastObject(pastObject, exerciseArray, 'reps', filteredCompObject);
+			return filteredPastObject;	
 
-
+		} else if (currentDataCat === 3) {
+			let pastObject = {
+				Yoga: [],
+				Pilates: [],
+				Spin: [],
+				Zumba: [],
+				Boxing: []
+			}
+			const exerciseArray = ['Yoga', 'Pilates', 'Spin', 'Zumba', 'Boxing'];
+			const filteredPastObject = filterPastObject(pastObject, exerciseArray, 'time', filteredCompObject);
+			return filteredPastObject;			
+		} 
 	}
 
-//push past data from filterComparisonArray function to pastStrengthObject. Return value to filterComparisonArray function 
-	const organisePastStrength = (filteredCompObject) => {
-		console.log('organising past strength:', filteredCompObject);
-		let pastStrengthObject = {
-			Pushups: [],
-			Squats: [],
-			Lunges: [],
-			Presses: [],
-			Curls: []
-		}
-
-		const exerciseArray = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls'];
-
-		for(let i = 0; i < exerciseArray.length; i ++) {
-			let filteredCat = filteredCompObject.filter((d) => d.exercise === exerciseArray[i]).map((e) => e.reps).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
+	const filterPastObject = (pastObject, exerciseArray, measurement, filteredCompObject) => {
+			for(let i = 0; i < exerciseArray.length; i ++) {
+			let filteredCat = filteredCompObject.filter((d) => d.exercise === exerciseArray[i]).map((e) => e.measurement).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
 			let cat = exerciseArray[i];
-			pastStrengthObject[`${cat}`].push(filteredCat);
+			pastObject[`${cat}`].push(filteredCat);
+			return pastObject;
 		}
-		return pastStrengthObject;	
 	}
-
-//push past data from filterComparisonArray function to pastSessionObject. Return value to filterComparisonArray function 
-	const organisePastSessions = (filteredCompObject) => {
-		console.log('organising past sessions:', filteredCompObject);
-		let pastSessionObject = {
-			Yoga: [],
-			Pilates: [],
-			Spin: [],
-			Zumba: [],
-			Boxing: []
-		}
-
-		const exerciseArray = ['Yoga', 'Pilates', 'Spin', 'Zumba', 'Boxing'];
-
-		for(let i = 0; i < exerciseArray.length; i ++) {
-			let filteredCat = filteredCompObject.filter((d) => d.exercise === exerciseArray[i]).map((e) => e.time).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-			let cat = exerciseArray[i];
-			pastSessionObject[`${cat}`].push(filteredCat);
-		}
-		return pastSessionObject;	
-	}	
-
 
 	const setCardioArray = (filteredCompObject) => {
-		console.log('setting cardio array');
 		const exerciseArray = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking']
 		compareArrays(exerciseArray, cardioObject);
 	}
 
 	const setStrengthArray = () => {
-		console.log('setting strength array');
 		const exerciseArray = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls'];
 		compareArrays(exerciseArray, strengthObject);
 	}
 
 	const setSessionArray = () => {
-		console.log('setting session array');
 		const exerciseArray = ['Yoga', 'Pilates', 'Spin', 'Zumba', 'Boxing'];
 		compareArrays(exerciseArray, sessionObject); 
 	} 
@@ -157,8 +130,6 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 		console.log(resultsArray);
 		setProgressArray(resultsArray);
 	}
-
-
 
 	useEffect(() => {
 		datesToCompare();

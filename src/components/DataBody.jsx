@@ -62,20 +62,20 @@ const DataBody = () => {
 				Running: [],
 				Swimming: [],
 				Cycling: [],
-				Rope: [],
+				JumpRope: [],
 				Walking: []
 		}
 
 		let totalRunning = data.filter((d) => d.exercise === 'Running').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
 		let totalSwimming = data.filter((d) => d.exercise === 'Swimming').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
 		let totalCycling = data.filter((d) => d.exercise === 'Cycling').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalRope = data.filter((d) => d.exercise === 'Jump Rope').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
+		let totalJumpRope = data.filter((d) => d.exercise === 'JumpJumpRope').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
 		let totalWalking = data.filter((d) => d.exercise === 'Walking').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
 	
 		cardioObject.Running.push(totalRunning);
 		cardioObject.Swimming.push(totalSwimming);
 		cardioObject.Cycling.push(totalCycling);
-		cardioObject.Rope.push(totalRope);
+		cardioObject.JumpRope.push(totalJumpRope);
 		cardioObject.Walking.push(totalWalking); 
 
 		setCardioObject(cardioObject);
