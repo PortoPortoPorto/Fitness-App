@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState'; 
+import Test from './Test.jsx';
 
 const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => {
 	const [ compareDates, setCompareDates ] = useState ('');
 	const [ pastData, setPastData ] = useState('');
 	const [ progressArray, setProgressArray ] = useState('');
-	const {  currentDataCat, dateRange } = useContext(GlobalContext); 
+	const {  currentDataCat, dateRange } = useContext(GlobalContext);
+	const [ units, setUnits ] = useState('');
 
 
 
@@ -44,6 +46,7 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 //Organise Data of filtered past activities (cardio/strength/session), reduce to single value (time/distance/reps) and push into shell object for comparison 
 	const organisePast = (filteredCompObject) => {
 		if(currentDataCat === 1) {
+			setUnits('km');
 			let pastObject = {
 				Running: [],
 				Swimming: [],
@@ -51,11 +54,12 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 				JumpRope: [],
 				Walking: []
 			}
-			const exerciseArray = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking'];
+			const exerciseArray = ['Swimming', 'Running', 'Cycling', 'JumpRope', 'Walking'];
 			const filteredPastObject = filterPastObject(pastObject, exerciseArray, 'distance', filteredCompObject);
 			return filteredPastObject; 
 
 		} else if (currentDataCat === 2) {
+			setUnits('reps');
 			let pastObject = {
 				Pushups: [],
 				Squats: [],
@@ -68,6 +72,7 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 			return filteredPastObject;	
 
 		} else if (currentDataCat === 3) {
+			setUnits('mins');
 			let pastObject = {
 				Yoga: [],
 				Pilates: [],
@@ -82,12 +87,18 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 	}
 
 	const filterPastObject = (pastObject, exerciseArray, measurement, filteredCompObject) => {
+			console.log(filteredCompObject, measurement);
 			for(let i = 0; i < exerciseArray.length; i ++) {
-			let filteredCat = filteredCompObject.filter((d) => d.exercise === exerciseArray[i]).map((e) => e.measurement).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
+			let filteredCat = filteredCompObject
+				.filter((d) => d.exercise === exerciseArray[i])
+				.map((e) => (e[measurement])) // THIS LINE GOT ME! Needed square braces as 'measurement' is a dynamic variable 
+				.map((p) => parseInt(p))
+				.reduce((a, c) => a + c, 0);
+			console.log(filteredCat);
 			let cat = exerciseArray[i];
 			pastObject[`${cat}`].push(filteredCat);
-			return pastObject;
 		}
+		return pastObject;
 	}
 
 	const setCardioArray = (filteredCompObject) => {
@@ -108,11 +119,15 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 //Function to compare current exercise data array with previous exercise data array. Triggered by change in pastData useState
 //loop through each category, comparing numbers of current and past exercies periods. If there is a difference, push as object to resultsArray 
 	const compareArrays = (exerciseArray, object) => {
+		console.log(exerciseArray);
+		console.log(pastData);
 		let resultsArray = [];
 		for(let i = 0; i < exerciseArray.length; i ++) {
 			let cat = exerciseArray[i];
 			let result = object[`${cat}`] - pastData[`${cat}`];
+			console.log('cat:', cat, object[`${cat}`], 'take',  pastData[`${cat}`], 'result:', result)
 			if(result < 0) {
+				console.log('current category is less than previous', cat);
 				const changeObject = {
 					name: cat,
 					result: result
@@ -120,6 +135,7 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 				resultsArray.push(changeObject);
 			}
 			 if(result > 0) {
+				console.log('current category is more than previous', cat);
 				const changeObject = {
 					name: cat,
 					result: result
@@ -127,7 +143,7 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 					resultsArray.push(changeObject);
 			}					
 		}
-		console.log(resultsArray);
+		console.log('results array:', resultsArray);
 		setProgressArray(resultsArray);
 	}
 
@@ -155,11 +171,15 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 
 	return (
 		<>
+		<Test/>
 		<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
 			<h1 className='p-2 text-lg font-semibold'>PROGRESS</h1>
 			<div className='text-blue-300 italic font-semibold'>vs previous {dateRange}</div>
 			{ progressArray.length !== 0 ?
-				(progressArray.map(a => (<div className={ a.result > 0 ? divClassPlus : divClassMinus} key={a.name}> {a.name} {a.result}  </div>))
+				(progressArray.map((a, index) => (
+					<div key={index}>
+					 {a.result > 0 ? (<div className={divClassPlus}>{a.name} + {a.result}<span className='text-base p-1'>{units}</span></div>)  : (<div className={divClassMinus}>{a.name} {a.result}<span className='text-base p-1'>{units}</span></div>)  }
+                    </div>))
 				) : (<div className='h-[400px] w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'>No Changes!</div>) 
 			}
 		</div>

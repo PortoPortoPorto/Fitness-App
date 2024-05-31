@@ -15,10 +15,6 @@ const DataModal = ({ dataModalToggled, setDataModalToggled, keyNumber}) => {
 		setDateRange(e); 
 	}
 
-	useEffect(() => {
-		console.log('date range set at:', dateRange); 
-	}, [dateRange]);
-
 	const changeView = () => {
 		setCurrentDataCat(keyNumber); 
 		setCurrentView('viewData');

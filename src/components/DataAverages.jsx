@@ -11,30 +11,30 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 		  { currentDataCat > 2 ? 
 		  	 (<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
 				<h1 className='p-2 text-lg font-semibold'>AVERAGES</h1>	
-					{ sessionObject.Yoga > 0 ? <div className={divClass}> Yoga: {Math.round(sessionObject.Yoga / days)} mins per day</div> : ''}
-					{ sessionObject.Pilates > 0 ? <div className={divClass}>Pilates : {Math.round(sessionObject.Pilates / days)} mins per day</div> : ''}
-					{ sessionObject.Spin > 0 ? <div className={divClass} >Spin: {Math.round(sessionObject.Spin / days)} mins per day</div> : ''}
-					{ sessionObject.Zumba> 0 ? <div className={divClass}>ZUMBA: {Math.round(sessionObject.Zumba/ days)} mins per day</div> : ''}
-					{ sessionObject.Boxing > 0 ? <div className={divClass}>Boxing: {Math.round(sessionObject.Boxing / days)} mins per day</div> : ''}
+					{ sessionObject.Yoga > 0 ? <div className={divClass}> Yoga:{Math.round(sessionObject.Yoga / days)}<span className='text-base p-1'>mins per day</span></div> : ''}
+					{ sessionObject.Pilates > 0 ? <div className={divClass}>Pilates : {Math.round(sessionObject.Pilates / days)}<span className='text-base p-1'>mins per day</span></div> : ''}
+					{ sessionObject.Spin > 0 ? <div className={divClass} >Spin: {Math.round(sessionObject.Spin / days)}<span className='text-base p-1'>mins per day</span></div> : ''}
+					{ sessionObject.Zumba> 0 ? <div className={divClass}>ZUMBA: {Math.round(sessionObject.Zumba/ days)}<span className='text-base p-1'>mins per day</span></div> : ''}
+					{ sessionObject.Boxing > 0 ? <div className={divClass}>Boxing: {Math.round(sessionObject.Boxing / days)}<span className='text-base p-1'>mins per day</span></div> : ''}
 			  	</div>)
 		  	:
 		    currentDataCat > 1 ?	 
 			  	(<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
 				<h1 className='p-2 text-lg font-semibold'>AVERAGES</h1>	
-					{ strengthObject.Pushups > 0 ? <div className={divClass}> Pushups: {Math.round(strengthObject.Pushups / days)} per day</div> : ''}
-					{ strengthObject.Squats > 0 ? <div className={divClass}>Squats : {Math.round(strengthObject.Squats / days)} per day</div> : ''}
-					{ strengthObject.Lunges > 0 ? <div className={divClass}>Lunges: {Math.round(strengthObject.Lunges / days)} per day</div> : ''}
-					{ strengthObject.Presses > 0 ? <div className={divClass}>Presses: {Math.round(strengthObject.Presses / days)} per day</div> : ''}
-					{ strengthObject.Curls > 0 ? <div className={divClass}>Curls: {Math.round(strengthObject.Curls / days)} per day</div> : ''}
+					{ strengthObject.Pushups > 0 ? <div className={divClass}> Pushups: {Math.round(strengthObject.Pushups / days)}<span className='text-base p-1'>per day</span></div> : ''}
+					{ strengthObject.Squats > 0 ? <div className={divClass}>Squats : {Math.round(strengthObject.Squats / days)}<span className='text-base p-1'>per day</span></div> : ''}
+					{ strengthObject.Lunges > 0 ? <div className={divClass}>Lunges: {Math.round(strengthObject.Lunges / days)}<span className='text-base p-1'>per day</span></div> : ''}
+					{ strengthObject.Presses > 0 ? <div className={divClass}>Presses: {Math.round(strengthObject.Presses / days)}<span className='text-base p-1'>per day</span></div> : ''}
+					{ strengthObject.Curls > 0 ? <div className={divClass}>Curls: {Math.round(strengthObject.Curls / days)}<span className='text-base p-1'>per day</span></div> : ''}
 			  	</div>)
 			:   
 				(<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
-					<h1 className='p-2 text-lg font-semibold'>AVERAGES</h1>	
-					{ cardioObject.Running > 0 ? <div className={divClass}>Running: {Math.round(cardioObject.Running / days)} km / day</div> : ''}
-					{ cardioObject.Swimming > 0 ? <div className={divClass}>Swimming : {Math.round(cardioObject.Swimming / days)} km / day</div> : ''}
-					{ cardioObject.Cycling > 0 ? <div className={divClass}>Cycling: {Math.round(cardioObject.Cycling / days)} km / day</div> : ''}
-					{ cardioObject.Rope> 0 ? <div className={divClass}>Rope : {Math.round(cardioObject.Rope / days)} mins / day</div> : ''}
-					{ cardioObject.Walking > 0 ? <div className={divClass}>Walking: {Math.round(cardioObject.Walking / days)} km / day</div> : ''}
+					<h1 className='p-2 text-lg font-semibold'>DAILY AVERAGES</h1>	
+					{ cardioObject.Running > 0 ? <div className={divClass}>Running: {Math.round(cardioObject.Running / days)}<span className='text-base p-1'>km</span></div> : ''}
+					{ cardioObject.Swimming > 0 ? <div className={divClass}>Swimming : {Math.round(cardioObject.Swimming / days)}<span className='text-base p-1'>km</span></div> : ''}
+					{ cardioObject.Cycling > 0 ? <div className={divClass}>Cycling: {Math.round(cardioObject.Cycling / days)}<span className='text-base p-1'>km</span></div> : ''}
+					{ cardioObject.Rope> 0 ? <div className={divClass}>Rope : {Math.round(cardioObject.Rope / days)}<span className='text-base p-1'>km</span></div> : ''}
+					{ cardioObject.Walking > 0 ? <div className={divClass}>Walking: {Math.round(cardioObject.Walking / days)}<span className='text-base p-1'>km</span></div> : ''}
 			  </div>)}
 		</>
 	)

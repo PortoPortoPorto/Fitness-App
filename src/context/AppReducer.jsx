@@ -8,7 +8,6 @@ export default (state, action) => {
 			};
 			break;
 		case 'ADD_CARDIO_EXERCISE':
-			console.log(action.payload.exercise); 
 			newState = {
 				...state,
 				cardioData: [action.payload, ...state.cardioData]
