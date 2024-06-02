@@ -8,7 +8,7 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 	const [exercise, setExercise] = useState('Squats'); 
 	const [reps, setReps] = useState(0); 
 	const [notes, setNotes] = useState(''); 
-	const { strengthData, addStrengthExercise, exerciseDate } = useContext(GlobalContext); 
+	const { strengthData, addStrengthExercise, exerciseDate, currentUser } = useContext(GlobalContext); 
 
 	const modalOff = () => {
 		console.log('modal off!');
@@ -23,7 +23,7 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 			notes: notes,
 			id: strengthData.length + 1
 		}
-		addStrengthExercise('userId1', newStrengthExercise); 
+		addStrengthExercise(currentUser, newStrengthExercise); 
 		modalOff(); 
 	}
 

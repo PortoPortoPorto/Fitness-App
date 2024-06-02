@@ -8,7 +8,7 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 	const [exercise, setExercise] = useState('Yoga');
 	const [time, setTime] = useState(0);
 	const [notes, setNotes] = useState(''); 
-	const { sessionData, addSessionExercise, exerciseDate } = useContext(GlobalContext); 
+	const { sessionData, addSessionExercise, exerciseDate, currentUser } = useContext(GlobalContext); 
 
 	const modalOff = () => {
 		console.log('modal off!');
@@ -23,7 +23,7 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 			notes: notes,
 			id: sessionData.length + 1
 		}
-		addSessionExercise('userId1', newSessionExercise); 
+		addSessionExercise(currentUser, newSessionExercise); 
 		modalOff(); 
 	}
 

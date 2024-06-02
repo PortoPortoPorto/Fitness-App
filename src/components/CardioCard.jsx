@@ -2,10 +2,10 @@ import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState.jsx'; 
 
 const CardioCard = ({cardio}) => {
-	const { cardioData, removeCardioExercise, exerciseDate } = useContext(GlobalContext);
+	const { cardioData, removeCardioExercise, exerciseDate, currentUser } = useContext(GlobalContext);
 	
 	const removeExercise = (e) => {
-		removeCardioExercise(cardio.id); 
+		removeCardioExercise(currentUser, cardio.id); 
 	}
 
 

@@ -2,11 +2,11 @@ import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState.jsx'; 
 
 const SessionsCard = ({session}) => {
-	const { sessionData, removeSessionExercise, exerciseDate }= useContext(GlobalContext);
+	const { sessionData, removeSessionExercise, exerciseDate, currentUser }= useContext(GlobalContext);
 
 	const removeExercise = () => {
 		console.log('removing:', session.exercise, 'from storage and UI'); 
-		removeSessionExercise(session.id);
+		removeSessionExercise(currentUser, session.id);
 	};
 	
 	return (		

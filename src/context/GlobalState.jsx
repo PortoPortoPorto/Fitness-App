@@ -50,6 +50,10 @@ export const GlobalProvider = ({ children }) => {
 	//State to keep track of starting date, determined by date range selection
 	const [ startingDate, setStartingDate] = useState(''); 
 
+	//State to change current user
+	const [currentUser, setCurrentUser] = useState('userId1');
+
+
 	//Actions 
 	const addStrengthExercise = ( userId, newStrengthExercise) => {
 		dispatch({
@@ -61,17 +65,23 @@ export const GlobalProvider = ({ children }) => {
 		});
 	};
 
-	const addCardioExercise = (newCardioExercise) => {
+	const addCardioExercise = (userId, newCardioExercise) => {
 		dispatch({
 			type: 'ADD_CARDIO_EXERCISE',
-			payload: newCardioExercise
+			payload: {
+				userId,
+				exercise: newCardioExercise
+			}
 		});
 	};
 
-	const addSessionExercise = (newSessionExercise) => {
+	const addSessionExercise = (userId, newSessionExercise) => {
 		dispatch({
 			type: 'ADD_SESSION_EXERCISE',
-			payload: newSessionExercise
+			payload: {
+				userId,
+				exercise: newSessionExercise
+			} 
 		});
 	};
 
@@ -85,25 +95,42 @@ export const GlobalProvider = ({ children }) => {
 		});
 	};
 
-	const removeCardioExercise = (id) => {
+	const removeCardioExercise = (userId, exerciseId) => {
 		dispatch({
 			type: 'REMOVE_CARDIO_EXERCISE',
-			payload: id
+			payload: {
+				userId,
+				exerciseId,
+			}
 		});
 	};
 
-	const removeSessionExercise = (id) => {
+	const removeSessionExercise = (userId, exerciseId) => {
 		dispatch({
 			type: 'REMOVE_SESSION_EXERCISE',
-			payload: id
+			payload: {
+				userId,
+				exerciseId,
+			}
 		});
 	};
+
+	const addNewUser = (newUserName, newPassword) => {
+		dispatch({
+			type: 'ADD_NEW_USER',
+			payload: {
+				newUserName,
+				newPassword,
+			}
+		})
+	}
 
 
 	return (<GlobalContext.Provider value={{
-		 strengthData: state.users.userId1.strengthData,
-		 cardioData: state.users.userId1.cardioData,
-		 sessionData: state.users.userId1.sessionData,
+		 strengthData: state.users[currentUser].strengthData,
+		 cardioData: state.users[currentUser].cardioData,
+		 sessionData: state.users[currentUser].sessionData,
+		 userData: state.users,
 		 addStrengthExercise,
 		 addCardioExercise,
 		 addSessionExercise,
@@ -119,7 +146,10 @@ export const GlobalProvider = ({ children }) => {
 		 dateRange,
 		 setDateRange,
 		 startingDate,
-		 setStartingDate
+		 setStartingDate,
+		 addNewUser,
+		 currentUser,
+		 setCurrentUser
 		}}>
 			{children}
 		</GlobalContext.Provider>);			

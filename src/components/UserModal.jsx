@@ -6,6 +6,7 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 	const [ returningUserName, setReturningUserName ] = useState('');
 	const [ newPassword, setNewPassword ] = useState('');
 	const [ returningPassword, setReturningPassword ] = useState('');
+	const { userData, addNewUser, currentUser, setCurrentUser } = useContext(GlobalContext);
 
 
 	const modalOff = () => {
@@ -34,8 +35,39 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 	}
 
 	const userCheck = () => {
-		console.log('checking user'); 
+		console.log('checking user:', userData);
+		if(!newUserName && !returningUserName){console.error('please enter a name');return;}
+		else if(newUserName && returningUserName){console.error('please select 1 option');return;}
+		else if(newUserName && !newPassword){console.error('please enter a new password');return;}
+		else if(returningUserName && !returningPassword){console.error('please enter your password');return;}
+	// If new user name and password, check to see if it already exists - if not, creat new user object in localStorage (GlobalState)
+		else if(newUserName && newPassword) {
+			if(userData[newUserName]){console.error(`user name ${newUserName} already exists`);return;}
+			else {
+				console.log('setting new user');
+				addNewUser(newUserName, newPassword);
+				console.log(`new user set: NAME: ${newUserName} PASSWORD: ${newPassword}`);
+				setCurrentUser(newUserName);
+				console.log(`signed in as user: ${newUserName}`);
+
+			} 
+	//If returning user name and password, check to see if it already exists, if so, set that user in the global state, if not, return an error
+		} else if(returningUserName && returningPassword) {
+			if(!userData[returningUserName]){console.error(`user name ${returningUserName} doesn't exist. Please check and try again!`);return;}
+			else if(userData[returningUserName].password !== returningPassword){console.error('password incorrect. Please check and try again.');return;}
+			else {
+				setCurrentUser(returningUserName);
+				console.log(`signed in as user: ${returningUserName}`);
+			} 
+		} 
+		modalOff();
 	}
+
+
+	useEffect(() => {
+		console.log('current user:', currentUser);
+	}, [currentUser]);
+
 
 	return (
 			/* HTML */

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState.jsx';
 import UserModal from './UserModal.jsx';
 
 const NavName = () => {
 	const [modalToggled, setModalToggled ] = useState(false);
-
+	const {currentUser} = useContext(GlobalContext);
+	const loggedOut = currentUser === 'userId1';
 	const modalOn = () => {
 		setModalToggled(true);
 	}
@@ -12,7 +14,9 @@ const NavName = () => {
 		<>
 		  <div className='border border-blue-200 rounded-md h-12 w-96 flex items-center justify-center cursor-pointer hover:bg-blue-200'
 		  	   onClick={modalOn}>
-			<p className='text-xl font-semibold'>User Name</p>
+			{ loggedOut ?  <p className='text-2xl text-blue-100 font-semibold'>Sign in</p> 
+						:  <p className='text-2xl text-blue-500 font-semibold'>{currentUser}</p>
+			}			
 		  </div>
 		  	{modalToggled  ? <UserModal modalToggled={modalToggled} setModalToggled={setModalToggled}/> : ''}	
 		</>

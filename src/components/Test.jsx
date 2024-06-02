@@ -9,7 +9,7 @@ const Test = () => {
 				JumpRope: [],
 				Walking: []
 			}
-	console.log(pastObject);
+
 
 	
 	return (

@@ -141,7 +141,7 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 						<button className='btn bg-blue-500 h-[35px] w-[100px] rounded-lg font-semibold text-white border-2 border-blue-300' onClick={toggleChartDisplay}>Chart</button>
 				  </div>)
 		    : <div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
-		    	<h1 className='p-2 text-lg font-semibold'>CHART</h1>
+		    	<h1 className='p-2 text-lg text-blue-400 font-semibold'>TOTALS CHART</h1>
 		    	<div className='h-[470px] w-[400px] flex flex-col justify-center items-center'>
 		    		<BarChart width={380} height={370} data={barChartArray}>
 		    			<YAxis/>
@@ -151,7 +151,6 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 		    	</div>
 		    	<button className='btn bg-blue-500 h-[35px] w-[100px] rounded-lg font-semibold text-white border-2 border-blue-300 m-2' onClick={toggleChartDisplay}>Totals</button>
 		      </div>
-
 			}
 		</>
 	)

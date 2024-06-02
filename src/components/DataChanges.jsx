@@ -127,7 +127,6 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 			let result = object[`${cat}`] - pastData[`${cat}`];
 			console.log('cat:', cat, object[`${cat}`], 'take',  pastData[`${cat}`], 'result:', result)
 			if(result < 0) {
-				console.log('current category is less than previous', cat);
 				const changeObject = {
 					name: cat,
 					result: result
@@ -135,7 +134,6 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 				resultsArray.push(changeObject);
 			}
 			 if(result > 0) {
-				console.log('current category is more than previous', cat);
 				const changeObject = {
 					name: cat,
 					result: result

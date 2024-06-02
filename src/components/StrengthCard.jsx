@@ -2,11 +2,11 @@ import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState.jsx';
 
 const StrengthCard = ({strength}) => {
-	const { strengthData, removeStrengthExercise, exerciseDate } = useContext(GlobalContext); 
+	const { strengthData, removeStrengthExercise, exerciseDate, currentUser } = useContext(GlobalContext); 
 	
 	const removeExercise = () => {
 		console.log('removing:', strength.exercise, 'from storage and UI'); 
-		removeStrengthExercise('userId1', strength.id)
+		removeStrengthExercise(currentUser, strength.id)
 	}
 
 	return (		

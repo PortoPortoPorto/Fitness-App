@@ -8,7 +8,7 @@ const CardioModal = ({modalToggled, setModalToggled}) => {
 	const [exercise, setExercise] = useState('Running'); 
 	const [distance, setDistance] = useState(0); 
 	const [notes, setNotes] = useState(''); 
-	const { cardioData, addCardioExercise, exerciseDate } = useContext(GlobalContext);
+	const { cardioData, addCardioExercise, exerciseDate, currentUser } = useContext(GlobalContext);
 
 	const modalOff = () => {
 		console.log('modal off!');
@@ -23,7 +23,7 @@ const CardioModal = ({modalToggled, setModalToggled}) => {
 			notes: notes,
 			id: cardioData.length + 1
 		}
-		addCardioExercise(newCardioExercise); 
+		addCardioExercise(currentUser, newCardioExercise); 
 		modalOff(); 
 	}
 
