@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState.jsx';  
 
 const NavLogout = () => {
+	const { setUser, resetState } = useContext(GlobalContext);
+	const reset = () => {
+		resetState();
+	}
+
 	return (
 		<>
-		  <div className='border border-blue-200 rounded-md h-12 w-40 flex items-center justify-center cursor-pointer hover:bg-blue-200'>
+		  <div className='border border-blue-200 rounded-md h-12 w-40 flex items-center justify-center cursor-pointer hover:bg-blue-200'
+		  		onClick={reset}>
 			<p className='text-xl font-semibold'>Log Out</p>
 		  </div>	
 		</>

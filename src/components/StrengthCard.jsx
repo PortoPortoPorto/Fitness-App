@@ -6,7 +6,7 @@ const StrengthCard = ({strength}) => {
 	
 	const removeExercise = () => {
 		console.log('removing:', strength.exercise, 'from storage and UI'); 
-		removeStrengthExercise(strength.id)
+		removeStrengthExercise('userId1', strength.id)
 	}
 
 	return (		

@@ -2,9 +2,20 @@ export default (state, action) => {
 	let newState;
 	switch(action.type) {
 		case 'ADD_STRENGTH_EXERCISE':
+			const { userId: addUserId, exercise } = action.payload
+			if(!state.users[addUserId]) {
+				console.error(`User with ID ${addUserId} does not exist`);
+				return;
+			}
 			newState = {
-				...state, 
-				strengthData: [action.payload, ...state.strengthData]
+				...state,
+				users: {
+					...state.users,
+					[addUserId]: {
+						...state.users[addUserId],
+						strengthData: [exercise, ...state.users[addUserId].strengthData]
+					}
+				} 
 			};
 			break;
 		case 'ADD_CARDIO_EXERCISE':
@@ -20,9 +31,20 @@ export default (state, action) => {
 			};
 			break;
 		case 'REMOVE_STRENGTH_EXERCISE':
+			const { userId: removeUserId, exerciseId } = action.payload;
+			if(!state.users[removeUserId]) {
+				console.error(`User with ID ${removeUserId} does not exist`);
+				return;
+			}
 			newState = {
 				...state,
-				strengthData: state.strengthData.filter(s => s.id !== action.payload)
+				users: {
+					...state.users,
+					[removeUserId]: {
+						...state.users[removeUserId],
+						strengthData: state.users[removeUserId].strengthData.filter(s => s.id !== exerciseId)
+					}
+				}
 			}
 			break; 
 		case 'REMOVE_CARDIO_EXERCISE':

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'; 
+import { useState, useContext, useEffect } from 'react'; 
 import Header from './components/Header.jsx'; 
 import Nav from './components/Nav.jsx';
 import Logbody from './components/Logbody.jsx';

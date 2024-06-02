@@ -23,7 +23,7 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 			notes: notes,
 			id: sessionData.length + 1
 		}
-		addSessionExercise(newSessionExercise); 
+		addSessionExercise('userId1', newSessionExercise); 
 		modalOff(); 
 	}
 

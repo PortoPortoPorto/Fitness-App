@@ -6,12 +6,20 @@ import AppReducer from './AppReducer.jsx';
 
 const loadInitialState = () => {
 	const storedState = localStorage.getItem('appData');
-	return storedState ? JSON.parse(storedState) : {
-		strengthData: [],
-		cardioData: [],
-		sessionData: []
+	return storedState ? JSON.parse(storedState) :
+	{	
+		users: {
+			userId1: {	
+				name: '',
+				password: '', 
+				strengthData: [],
+				cardioData: [],
+				sessionData: []
+			},
+			// add other users here
+		}
 	}
-}
+};
 
 //Create Context 
 export const GlobalContext = createContext(loadInitialState()); 
@@ -43,53 +51,59 @@ export const GlobalProvider = ({ children }) => {
 	const [ startingDate, setStartingDate] = useState(''); 
 
 	//Actions 
-	const addStrengthExercise = (newStrengthExercise) => {
+	const addStrengthExercise = ( userId, newStrengthExercise) => {
 		dispatch({
 			type: 'ADD_STRENGTH_EXERCISE',
-			payload: newStrengthExercise
+			payload: {
+				userId,
+				exercise: newStrengthExercise
+			}
 		});
-	}
+	};
 
 	const addCardioExercise = (newCardioExercise) => {
 		dispatch({
 			type: 'ADD_CARDIO_EXERCISE',
 			payload: newCardioExercise
 		});
-	}
+	};
 
 	const addSessionExercise = (newSessionExercise) => {
 		dispatch({
 			type: 'ADD_SESSION_EXERCISE',
 			payload: newSessionExercise
 		});
-	}
+	};
 
-	const removeStrengthExercise = (id) => {
+	const removeStrengthExercise = (userId, exerciseId) => {
 		dispatch({
 			type: 'REMOVE_STRENGTH_EXERCISE',
-			payload: id
+			payload: {
+				userId,
+				exerciseId,
+			}
 		});
-	}
+	};
 
 	const removeCardioExercise = (id) => {
 		dispatch({
 			type: 'REMOVE_CARDIO_EXERCISE',
 			payload: id
 		});
-	}
+	};
 
 	const removeSessionExercise = (id) => {
 		dispatch({
 			type: 'REMOVE_SESSION_EXERCISE',
 			payload: id
 		});
-	}
+	};
 
 
 	return (<GlobalContext.Provider value={{
-		 strengthData: state.strengthData,
-		 cardioData: state.cardioData,
-		 sessionData: state.sessionData,
+		 strengthData: state.users.userId1.strengthData,
+		 cardioData: state.users.userId1.cardioData,
+		 sessionData: state.users.userId1.sessionData,
 		 addStrengthExercise,
 		 addCardioExercise,
 		 addSessionExercise,
