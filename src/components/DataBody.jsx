@@ -36,22 +36,17 @@ const DataBody = () => {
 				Squats: [],
 				Lunges: [],
 				Presses: [],
-				Curls: []
+				Curls: [],
+				Crunches: []
 		}
 
+		const categories = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls', 'Crunches'];
 
-		let totalPushups = data.filter((d) => d.exercise === 'Pushups').map((e) => e.reps).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalSquats = data.filter((d) => d.exercise === 'Squats').map((e) => e.reps).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalLunges = data.filter((d) => d.exercise === 'Lunges').map((e) => e.reps).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalPresses = data.filter((d) => d.exercise === 'Presses').map((e) => e.reps).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalCurls = data.filter((d) => d.exercise === 'Curls').map((e) => e.reps).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-
-		strengthObject.Pushups.push(totalPushups);
-		strengthObject.Squats.push(totalSquats);
-		strengthObject.Lunges.push(totalLunges);
-		strengthObject.Presses.push(totalPresses);
-		strengthObject.Curls.push(totalCurls);
-
+		categories.forEach((category) => {
+			const totalReps = data.filter((d) => d.exercise === category).map((e) => e.reps).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
+			strengthObject[category] = [totalReps];
+			
+		});
 		setStrengthObject(strengthObject);
 	}
 
@@ -66,20 +61,13 @@ const DataBody = () => {
 				Walking: []
 		}
 
-		let totalRunning = data.filter((d) => d.exercise === 'Running').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalSwimming = data.filter((d) => d.exercise === 'Swimming').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalCycling = data.filter((d) => d.exercise === 'Cycling').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalJumpRope = data.filter((d) => d.exercise === 'JumpJumpRope').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalWalking = data.filter((d) => d.exercise === 'Walking').map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-	
-		cardioObject.Running.push(totalRunning);
-		cardioObject.Swimming.push(totalSwimming);
-		cardioObject.Cycling.push(totalCycling);
-		cardioObject.JumpRope.push(totalJumpRope);
-		cardioObject.Walking.push(totalWalking); 
+		const categories = [ 'Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking' ];
 
+		categories.forEach((category) => {
+			const totalDistance = data.filter((d) => d.exercise === category).map((e) => e.distance).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
+			cardioObject[category] = [totalDistance];
+		});
 		setCardioObject(cardioObject);
-
 	}	
 
 //Return an array containing the different session categories to render
@@ -92,18 +80,12 @@ const DataBody = () => {
 				Boxing: []
 		}
 
-		let totalYoga = data.filter((d) => d.exercise === 'Yoga').map((e) => e.time).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalPilates = data.filter((d) => d.exercise === 'Pilates').map((e) => e.time).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalSpin = data.filter((d) => d.exercise === 'Spin').map((e) => e.time).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalZumba = data.filter((d) => d.exercise === 'Zumba').map((e) => e.time).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
-		let totalBoxing = data.filter((d) => d.exercise === 'Boxing').map((e) => e.time).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
+		const categories = [ 'Yoga', 'Pilates', 'Spin', 'Zumba', 'Boxing' ];
 
-		sessionObject.Yoga.push(totalYoga);
-		sessionObject.Pilates.push(totalPilates);
-		sessionObject.Spin.push(totalSpin);
-		sessionObject.Zumba.push(totalZumba);
-		sessionObject.Boxing.push(totalBoxing);
-
+		categories.forEach((category) => {
+			const totalTime = data.filter((d) => d.exercise === category).map((e) => e.time).map(p => parseInt(p)).reduce((a, c) => a + c, 0);
+			sessionObject[category] = [totalTime];
+		});
 		setSessionObject(sessionObject);
 	}	
 

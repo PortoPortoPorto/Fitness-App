@@ -67,6 +67,10 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 					{
 						name: 'Curls',
 						reps: strengthObject.Curls[0]
+					},
+					{
+						name: 'Crunches',
+						reps: strenghObject.Crunches[0]
 					}
 
 					]
@@ -128,6 +132,7 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 						{ strengthObject.Lunges > 0 ? <div className={divClass}>Lunges: {strengthObject.Lunges}</div> : ''}
 						{ strengthObject.Presses > 0 ? <div className={divClass}>Presses: {strengthObject.Presses}</div> : ''}
 						{ strengthObject.Curls > 0 ? <div className={divClass}>Curls: {strengthObject.Curls}</div> : ''}
+						{ strengthObject.Crunches > 0 ? <div className={divClass}>Crunches: {strengthObject.Crunches}</div> : ''}
 						<button className='btn bg-blue-500 h-[35px] w-[100px] rounded-lg font-semibold text-white border-2 border-blue-300' onClick={toggleChartDisplay}>Chart</button>
 				  	</div>)
 				:   

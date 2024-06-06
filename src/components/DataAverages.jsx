@@ -76,6 +76,10 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 						{
 							name: 'Curls',
 							reps: chartAverages(strengthObject.Curls, 'reps')
+						}, 
+						{
+							nae: 'Crunches',
+							reps: chartAverages(strenghObject.Crunches, 'reps')
 						}
 
 						]
@@ -135,6 +139,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 						{ strengthObject.Lunges > 0 ? <div className={divClass}>Lunges: {Math.round(strengthObject.Lunges / days)}<span className='text-base p-1'>per day</span></div> : ''}
 						{ strengthObject.Presses > 0 ? <div className={divClass}>Presses: {Math.round(strengthObject.Presses / days)}<span className='text-base p-1'>per day</span></div> : ''}
 						{ strengthObject.Curls > 0 ? <div className={divClass}>Curls: {Math.round(strengthObject.Curls / days)}<span className='text-base p-1'>per day</span></div> : ''}
+						{ strengthObject.Crunches > 0 ? <div className={divClass}>Crunches: {Math.round(strengthObject.Crunches / days)}<span className='text-base p-1'>per day</span></div> : ''}
 						<button className='btn bg-blue-500 h-[35px] w-[100px] rounded-lg font-semibold text-white border-2 border-blue-300' onClick={toggleChartDisplay}>Chart</button>
 				  	</div>)
 				:   

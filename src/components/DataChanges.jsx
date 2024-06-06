@@ -65,7 +65,8 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 				Squats: [],
 				Lunges: [],
 				Presses: [],
-				Curls: []
+				Curls: [],
+				Crunches: []
 			}
 			const exerciseArray = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls'];
 			const filteredPastObject = filterPastObject(pastObject, exerciseArray, 'reps', filteredCompObject);
@@ -107,7 +108,7 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 	}
 
 	const setStrengthArray = () => {
-		const exerciseArray = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls'];
+		const exerciseArray = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls', 'Crunches'];
 		compareArrays(exerciseArray, strengthObject);
 	}
 

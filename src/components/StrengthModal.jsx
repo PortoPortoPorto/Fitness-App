@@ -64,6 +64,7 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 		        			<option>Lunges</option>
 		        			<option>Bench Press</option>
 		        			<option>Bicep Curls</option>
+		        			<option>Crunches</option>
 		        		</select>		        				
 		              </div>
 		              <div className="h-[60px] flex items-center justify-around">
