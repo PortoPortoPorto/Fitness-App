@@ -23,95 +23,58 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 
 	chartAverages(strengthObject.Squats, 'reps' );
 
+//Push averages (chartAverages function) of all exercises in current category into chartData array, and set barChartArray with the result
 	const createChartObjects = (currentDataCat) => {
 				if(currentDataCat === 1){
-					const barChartData = [
-						{
-							name: 'Running',
-							reps: chartAverages(cardioObject.Running, 'km')
-						},
-						{
-							name: 'Swimming',
-							reps: chartAverages(cardioObject.Swimming, 'km')
-						},
+					const chartData = []
+					const chartCategories = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking'];
 
-						{
-							name: 'Cycling',
-							reps: chartAverages(cardioObject.Cycling, 'km')
-						},
-
-						{
-							name: 'JumpRope',
-							reps: chartAverages(cardioObject.JumpRope, 'km')
-						},
-
-						{
-							name: 'Walking',
-							reps: chartAverages(cardioObject.Walking, 'km')
+					chartCategories.forEach((category) => {
+						console.log(`chart category: ${category}`, cardioObject[category]);
+						if(cardioObject[category] > 0) {
+							let dataObject = {
+									name: category,
+									reps: chartAverages(cardioObject[category], 'km')
+							}
+							chartData.push(dataObject)
 						}
+					});
 
-						]
-						setBarChartArray(barChartData);				
+					setBarChartArray(chartData);	
+		
 				} else if(currentDataCat === 2) {
-					const barChartData = [
-						{
-							name: 'Pushups',
-							reps: chartAverages(strengthObject.Pushups, 'reps')
-						},
-						{
-							name: 'Squats',
-							reps: chartAverages(strengthObject.Squats, 'reps')
-						},
+					const chartData = [];
+					const chartCategories = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls', 'Crunches'];
 
-						{
-							name: 'Lunges',
-							reps: chartAverages(strengthObject.Lunges, 'reps')
-						},
+					chartCategories.forEach((category) => {
+						console.log(`chart category: ${category}`, strengthObject[category]);	
+						if(strengthObject[category] > 0) {
+							let dataObject = {
+								name: category,
+								reps: chartAverages(strengthObject[category], 'km')
+							}
+							chartData.push(dataObject);
+						}				
+					});
 
-						{
-							name: 'Presses',
-							reps: chartAverages(strengthObject.Presses, 'reps')
-						},
+					setBarChartArray(chartData);
 
-						{
-							name: 'Curls',
-							reps: chartAverages(strengthObject.Curls, 'reps')
-						}, 
-						{
-							nae: 'Crunches',
-							reps: chartAverages(strenghObject.Crunches, 'reps')
-						}
-
-						]
-						setBarChartArray(barChartData);
 				} else if(currentDataCat === 3) {
-					const barChartData = [
-						{
-							name: 'Yoga',
-							reps: chartAverages(sessionObject.Yoga, 'mins')
-						},
-						{
-							name: 'Pilates',
-							reps: chartAverages(sessionObject.Pilates, 'mins')
-						},
+					const chartData = [];
+					const chartCategories = ['Yoga', 'Pilates', 'Spin', 'Zumba', 'Boxing'];
 
-						{
-							name: 'Spin',
-							reps: chartAverages(sessionObject.Spin, 'mins')
-						},
+					chartCategories.forEach((category) => {
+						console.log(`chart category: ${category}`, sessionObject[category]);	
+						if(sessionObject[category] > 0) {
+							let dataObject = {
+								name: category,
+								reps: chartAverages(sessionObject[category], 'mins')
+							}
+							chartData.push(dataObject);
+						}				
+					});
 
-						{
-							name: 'Zumba',
-							reps: chartAverages(sessionObject.Zumba, 'mins')
-						},
-
-						{
-							name: 'Boxing',
-							reps: chartAverages(sessionObject.Boxing, 'mins')
-						},
-
-						]	
-						setBarChartArray(barChartData);		
+					setBarChartArray(chartData);		
 				}
 			}
 

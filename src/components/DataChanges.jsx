@@ -95,7 +95,6 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 				.map((e) => (e[measurement])) // THIS LINE GOT ME! Needed square braces as 'measurement' is a dynamic variable 
 				.map((p) => parseInt(p))
 				.reduce((a, c) => a + c, 0);
-			console.log(filteredCat);
 			let cat = exerciseArray[i];
 			pastObject[`${cat}`].push(filteredCat);
 		}
@@ -120,8 +119,6 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 //Function to compare current exercise data array with previous exercise data array. Triggered by change in pastData useState
 //loop through each category, comparing numbers of current and past exercies periods. If there is a difference, push as object to resultsArray 
 	const compareArrays = (exerciseArray, object) => {
-		console.log(exerciseArray);
-		console.log(pastData);
 		let resultsArray = [];
 		for(let i = 0; i < exerciseArray.length; i ++) {
 			let cat = exerciseArray[i];

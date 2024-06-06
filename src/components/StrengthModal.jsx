@@ -22,9 +22,10 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 			reps: reps,
 			notes: notes,
 			id: strengthData.length + 1
-		}
-		addStrengthExercise(currentUser, newStrengthExercise); 
-		modalOff(); 
+		};
+
+		addStrengthExercise(currentUser, newStrengthExercise);
+		modalOff();
 	}
 
 	return (

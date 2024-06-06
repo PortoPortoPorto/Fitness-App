@@ -15,22 +15,18 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 	}
 
 	const handleNewUser = (event) => {
-		console.log('handling new user');
 		setNewUserName(event.target.value);
 	}
 
 	const handleReturningUser = (event) => {
-		console.log('handling returning user');
 		setReturningUserName(event.target.value);
 	}
 
 	const handleReturningPassword = (event) => {
-		console.log('handling returning password');
 		setReturningPassword(event.target.value);
 	}
 
 	const handleNewPassword = (event) => {
-		console.log('handling new password');
 		setNewPassword(event.target.value);
 	}
 

@@ -7,6 +7,7 @@ const LoggedStrength = () => {
 	const {strengthData} = useContext(GlobalContext);
 
 
+
 	return (
 		<>
 		  <div className='bg-blue-300 h-[275px] w-[220px] rounded-xl flex-col items-end justify-between cursor-pointer'>
