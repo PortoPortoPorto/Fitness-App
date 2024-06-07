@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalState.jsx'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faDumbbell} from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,7 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 	const [exercise, setExercise] = useState('Squats'); 
 	const [reps, setReps] = useState(0); 
 	const [notes, setNotes] = useState(''); 
+	const [ errorMessage, setErrorMessage ] = useState(false); 
 	const { strengthData, addStrengthExercise, exerciseDate, currentUser } = useContext(GlobalContext); 
 
 	const modalOff = () => {
@@ -16,17 +17,33 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 	}
 
 	const submitData = () => {
-		const newStrengthExercise = {
-			date: exerciseDate,
-			exercise: exercise,
-			reps: reps,
-			notes: notes,
-			id: strengthData.length + 1
-		};
+//check that reps have been filled, if not, setErrorMessage and return 		
+		if(reps === 0) {
+			setErrorMessage('Please enter total reps')
+			return;
+		}
+		else {			
+			const newStrengthExercise = {
+				date: exerciseDate,
+				exercise: exercise,
+				reps: reps,
+				notes: notes,
+				id: strengthData.length + 1
+			};
 
-		addStrengthExercise(currentUser, newStrengthExercise);
-		modalOff();
+			addStrengthExercise(currentUser, newStrengthExercise);
+			modalOff();
+		}
 	}
+
+	useEffect(() => {
+		if(errorMessage === false )return;
+		else{
+			setTimeout(() => {
+				setErrorMessage(false); 
+			}, 2000);
+		}
+	}, [errorMessage])	
 
 	return (
 		/* HTML */
@@ -49,13 +66,17 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 		            <FontAwesomeIcon icon={faDumbbell} className='text-4xl'/>
 		          </div>
 		          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-		            <h3 className="text-lg leading-6 font-semibold text-gray-900" id="modal-title">
-		              Select Strength Exercise
-		            </h3>
+			        {/* MODAL TITLE / ERROR MESSAGE DIV */}		            
+	{errorMessage === false ? <div className='h-[40px] m-1 p-1'><h3 className="text-lg leading-6 font-semibold text-gray-900" id="modal-title">
+			                      Select Strength Exercise
+			            	  </h3></div>
+			              	: <div className='h-[40px] w-[300px] m-1 p-1 bg-red-300 border border-red-400 rounded-md italic text-lg font-semibold'>
+			              		 {errorMessage}
+			              	  </div>}
 		            {/*  Modal Description */}
-		            <div className="mt-2 h-[240px] w-[350px] flex flex-col items-around justify-around">
-		              <div className="h-[60px] flex items-center justify-around">
-		              	<p className="text-medium font-semibold p-2">Type</p>
+		            <div className="mt-2 h-[260px] w-[350px] flex flex-col items-start justify-start">
+		              <div className="h-[70px] flex items-center justify-around m-2">
+		              	<p className="text-medium font-semibold p-2 mr-20">Type:</p>
 		        		<select className='h-[50px] w-[150px] border border-blue-100 rounded-md' 
 		        				placeholder='Select Exercise'
 		        				onChange={(e) => setExercise(e.target.value)}
@@ -68,17 +89,17 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 		        			<option>Crunches</option>
 		        		</select>		        				
 		              </div>
-		              <div className="h-[60px] flex items-center justify-around">
-		              	<p className="text-medium font-semibold p-2">Total Reps</p>
-		              	<input className='h-[50px] w-[135px] rounded-md p-2' type='text' 
+		              <div className="h-[70px] flex items-center justify-around m-2">
+		              	<p className="text-medium font-semibold p-2 mr-10">Total Reps:</p>
+		              	<input className='h-[50px] w-[135px] rounded-md p-2 mr-2' type='text' 
 		              		   placeholder='enter reps'
 		              		   onChange={(e) => setReps(e.target.value)}> 
 		              	</input>
 		              	<p className="text-medium font-semibold">Reps</p>
 		              </div>
-		              <div className="h-[80px] flex items-center justify-around">
-		              	<p className="text-medium font-semibold p-2">Notes</p>
-		              	<input className='h-[80px] rounded-md p-2' type='text' 
+		              <div className="h-[80px] flex items-center justify-around m-2">
+		              	<p className="text-medium font-semibold p-2 mr-12">Notes:</p>
+		              	<input className='h-[80px] rounded-md p-2 ml-5' type='text' 
 		              		   placeholder='enter notes'
 		              		   onChange={(e) => setNotes(e.target.value)}> 		              		
 		              	</input>

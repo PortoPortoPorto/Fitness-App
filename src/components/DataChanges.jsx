@@ -129,7 +129,8 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 			}
 		}
 		console.log(notable); 
-		setNotable(n); 
+		if(n === '')return;
+		else setNotable(n);
 	}
 
 

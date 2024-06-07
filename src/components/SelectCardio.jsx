@@ -15,7 +15,7 @@ const LogCardio = () => {
 
 	return (
 		<>
-		  <div className='bg-blue-200 hover:bg-blue-100 hover:text-blue-400 h-[400px] w-[300px] rounded-xl flex-col items-end justify-between cursor-pointer shadow-md'
+		  <div className='bg-blue-200 hover:bg-blue-100 hover:text-blue-400 h-[400px] w-[300px] rounded-xl flex-col items-end justify-between cursor-pointer shadow-md m-3 md:m-0'
 		       onClick={modalOn}>
 		  	<div className='p-2 h-[250px] w-[300px] flex items-center justify-center'>
 		  		<FontAwesomeIcon icon={faPersonRunning} className='text-8xl'/>

@@ -38,17 +38,17 @@ const NavDate = () => {
 	return (
 		<>
 		  {currentView === 'byDate'? 
-		  <div className='border border-blue-200 rounded-md h-12 w-96 flex items-center justify-around cursor-pointer hover:bg-blue-200'>
+		  <div className='border border-blue-200 rounded-md h-12 w-[175px] md:w-[250px] flex items-center justify-around cursor-pointer hover:bg-blue-200'>
 			<FontAwesomeIcon icon="fa-solid fa-chevron-left" className= 'text-3xl text-blue-100 hover:text-blue-400 hover:text-4xl'
 							 onClick={previousDate}/>
-			<p className='text-xl font-semibold' onClick={changeView}>{exerciseDate}</p>
+			<p className='text-lg md:text-xl font-semibold' onClick={changeView}>{exerciseDate}</p>
 			{ isToday === true ? <div className='h-[50px] w[70px]'></div>
 			 				  :<FontAwesomeIcon icon="fa-solid fa-chevron-right" className= 'text-3xl text-blue-100 hover:text-blue-400 hover:text-4xl'
 			 				 onClick={nextDate}/>}
 		  </div> 
 		 : 
-		  <div className='border border-blue-200 rounded-md h-12 w-96 flex items-center justify-around cursor-pointer hover:bg-blue-200'>
-			<p className='text-xl font-semibold' onClick={changeView}>{exerciseDate}</p>
+		  <div className='border border-blue-200 rounded-md h-12 w-[175px] md:w-[250px] flex items-center justify-around cursor-pointer hover:bg-blue-200'>
+			<p className='text-lg md:text-xl font-semibold' onClick={changeView}>{exerciseDate}</p>
 		  </div> }	
 		</>
 	)

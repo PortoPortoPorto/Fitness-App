@@ -21,7 +21,7 @@ const LogCardio = () => {
 
 	return (
 		<>
-		  <div className='bg-blue-200 h-[275px] w-[220px] rounded-xl flex-col items-end justify-between cursor-pointer shadow-md'
+		  <div className='bg-blue-200 h-[275px] w-[220px] rounded-xl flex-col items-end justify-between cursor-pointer shadow-md m-2 md:m-0'
 		       onClick={modalOn}
 		       onMouseEnter={toggleHighlight}
 		       onMouseLeave={toggleHighlight}>

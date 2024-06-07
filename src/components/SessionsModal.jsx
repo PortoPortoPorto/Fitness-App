@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useContext } from 'react'; 
+import { useState, useContext, useEffect } from 'react'; 
 import { GlobalContext } from '../context/GlobalState.jsx'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStopwatch} from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,7 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 	const [exercise, setExercise] = useState('Yoga');
 	const [time, setTime] = useState(0);
 	const [notes, setNotes] = useState(''); 
+	const [ errorMessage, setErrorMessage ] = useState(false);
 	const { sessionData, addSessionExercise, exerciseDate, currentUser } = useContext(GlobalContext); 
 
 	const modalOff = () => {
@@ -16,16 +17,33 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 	}
 
 	const submitData = () => {
-		const newSessionExercise = {
-			date: exerciseDate,
-			exercise: exercise,
-			time: time,
-			notes: notes,
-			id: sessionData.length + 1
+//check that time has been filled, if not, setErrorMessage and return 		
+		if(time === 0) {
+			setErrorMessage('Please enter total time')
+			return;
 		}
-		addSessionExercise(currentUser, newSessionExercise); 
-		modalOff(); 
+		else {			
+			const newSessionExercise = {
+				date: exerciseDate,
+				exercise: exercise,
+				time: time,
+				notes: notes,
+				id: sessionData.length + 1
+			}
+			addSessionExercise(currentUser, newSessionExercise); 
+			modalOff();
+		} 
 	}
+
+	useEffect(() => {
+		if(errorMessage === false )return;
+		else{
+			setTimeout(() => {
+				setErrorMessage(false); 
+			}, 2000);
+		}
+	}, [errorMessage])
+
 
 	return (
 			/* HTML */
@@ -48,13 +66,17 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 			            <FontAwesomeIcon icon={faStopwatch} className='text-4xl'/>
 			          </div>
 			          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-			            <h3 className="text-lg leading-6 font-semibold text-gray-900" id="modal-title">
-			              Select Session
-			            </h3>
+ 						{/* MODAL TITLE / ERROR MESSAGE DIV */}
+	{errorMessage === false ? <div className='h-[40px] m-1 p-1'><h3 className="text-lg leading-6 font-semibold text-gray-900" id="modal-title">
+			                      Select Session Exercise
+			            	  </h3></div>
+			              	: <div className='h-[40px] w-[300px] m-1 p-1 bg-red-300 border border-red-400 rounded-md italic text-lg font-semibold'>
+			              		 {errorMessage}
+			              	  </div>}
 			            {/*  Modal Description */}
-			            <div className="mt-2 h-[240px] w-[350px] flex flex-col items-around justify-around">
-			              <div className="h-[60px] flex items-center justify-around">
-			              	<p className="text-medium font-semibold p-2">Type</p>
+			            <div className="mt-2 h-[260px] w-[350px] flex flex-col items-start justify-start">
+			              <div className="h-[70px] flex items-center justify-around m-2">
+			              	<p className="text-medium font-semibold p-2 mr-16">Type:</p>
 			        		<select className='h-[50px] w-[150px] border border-blue-100 rounded-md' 
 			        			    placeholder='Select Exercise'
 			        			    onClick={(e) => setExercise(e.target.value)}>
@@ -65,16 +87,16 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 			        			<option>Boxing</option>
 			        		</select>		        				
 			              </div>
-			              <div className="h-[60px] flex items-center justify-around">
-			              	<p className="text-medium font-semibold p-2">Total Time</p>
-			              	<input className='h-[50px] w-[135px] rounded-md p-2' type='text' 
+			              <div className="h-[70px] flex items-center justify-around m-2">
+			              	<p className="text-medium font-semibold p-2 mr-6">Total Time:</p>
+			              	<input className='h-[50px] w-[135px] rounded-md p-2 mr-2' type='text' 
 			              		   placeholder='enter duration'
 			              		   onChange={(e) => setTime(e.target.value)}>			              		   	
 			              	</input>
-			              	<p className="text-medium font-semibold">Minutes</p>
+			              	<p className="text-medium font-semibold">Minutes:</p>
 			              </div>
-			              <div className="h-[80px] flex items-center justify-around">
-			              	<p className="text-medium font-semibold p-2">Notes</p>
+			              <div className="h-[80px] flex items-center justify-around m-2">
+			              	<p className="text-medium font-semibold p-2 mr-14">Notes:</p>
 			              	<input className='h-[80px] rounded-md p-2' type='text' 
 			              		   placeholder='enter notes'
 			              		   onChange={(e) => setNotes(e.target.value)}>			              		   	

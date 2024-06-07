@@ -118,7 +118,7 @@ const DataBody = () => {
 
 	return (
 		<>
-			<div className='flex m-4 p-4'>	
+			<div className='flex flex-col items-center xl:flex-row m-4 p-4'>	
 				<DataTotals strengthObject={strengthObject} cardioObject={cardioObject} sessionObject={sessionObject}/>
 				<DataAverages strengthObject={strengthObject} cardioObject={cardioObject} sessionObject={sessionObject} days={days}/>
 				<DataChanges strengthObject={strengthObject} cardioObject={cardioObject} sessionObject={sessionObject} dataCat={dataCat}/> 

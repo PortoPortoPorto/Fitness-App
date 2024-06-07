@@ -111,9 +111,7 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 			              </div>
 			              {/*ERROR MESSAGE DIV */}
 			              {errorMessage === false ? <div className='h-[40px] m-2'></div>  
-			              						  : <div className='h-[40px] w-[450px] m-2 p-1 bg-red-300 border border-red-400 rounded-md italic font-semibold'>{errorMessage}</div>
-
-			              }
+			              						  : <div className='h-[40px] w-[450px] m-2 p-1 bg-red-300 border border-red-400 rounded-md italic font-semibold'>{errorMessage}</div>}
 			              {/*New User */}
 			              <div className="h-[60px] flex items-center justify-start">
 			              	<p className="text-lg font-semibold m-1 p-2 mr-11">New:</p>

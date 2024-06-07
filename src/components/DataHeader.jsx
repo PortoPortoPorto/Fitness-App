@@ -32,11 +32,11 @@ const DataHeader = () => {
 
 	return (
 		<>
-		  <div className='flex items-center justify-center h-28'>
+		  <div className='flex flex-col md:flex-row items-center justify-center h-28'>
 			{currentDataCat > 2 ? (<h3 className='font-semibold text-xl text-blue-100 p-3 border-b-2 border-blue-200'>Sessions Exercise Data</h3>)
 			: currentDataCat > 1 ? (<h3 className='font-semibold text-xl text-blue-100 p-3 border-b-2 border-blue-200'>Strength Exercise Data</h3>) 
 								 : (<h3 className='font-semibold text-xl text-blue-100 p-3 border-b-2 border-blue-200'>Cardio Exercise Data</h3>)}
-			<h3 className='font-semibold text-xl text-blue-100 p-3 border-b-2 border-blue-200'>
+			<h3 className='font-semibold text-xl text-blue-100 p-3 md:border-b-2 border-blue-200'>
 				<span className='p-3 text-md text-blue-300 italic'>from:</span>{startingDate}<span className='p-3 text-md text-blue-300 italic'>to:</span>{dataDate}</h3>
 		  </div>	
 		</>

@@ -12,7 +12,7 @@ const NavName = () => {
 
 	return (
 		<>
-		  <div className='border border-blue-200 rounded-md h-12 w-96 flex items-center justify-center cursor-pointer hover:bg-blue-200'
+		  <div className='border border-blue-200 rounded-md h-12 w-[125px] md:w-96 flex items-center justify-center cursor-pointer hover:bg-blue-200'
 		  	   onClick={modalOn}>
 			{ loggedOut ?  <p className='text-2xl text-blue-100 font-semibold'>Sign in</p> 
 						:  <p className='text-2xl text-blue-500 font-semibold'>{currentUser}</p>

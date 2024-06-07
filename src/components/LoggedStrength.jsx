@@ -10,7 +10,7 @@ const LoggedStrength = () => {
 
 	return (
 		<>
-		  <div className='bg-blue-300 h-[275px] w-[220px] rounded-xl flex-col items-end justify-between cursor-pointer shadow-md'>
+		  <div className='bg-blue-300 h-[275px] w-[220px] rounded-xl flex-col items-end justify-between cursor-pointer shadow-md m-2 md:m-0'>
 		  	{strengthData.map(s => (<StrengthCard key={s.id} strength={s}/>))}
 		  </div>
 		</>
