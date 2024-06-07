@@ -6,6 +6,7 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 	const [ returningUserName, setReturningUserName ] = useState('');
 	const [ newPassword, setNewPassword ] = useState('');
 	const [ returningPassword, setReturningPassword ] = useState('');
+	const [ errorMessage, setErrorMessage ] = useState(false); 
 	const { userData, addNewUser, currentUser, setCurrentUser } = useContext(GlobalContext);
 
 
@@ -30,15 +31,16 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 		setNewPassword(event.target.value);
 	}
 
+
 	const userCheck = () => {
 		console.log('checking user:', userData);
-		if(!newUserName && !returningUserName){console.error('please enter a name');return;}
-		else if(newUserName && returningUserName){console.error('please select 1 option');return;}
-		else if(newUserName && !newPassword){console.error('please enter a new password');return;}
-		else if(returningUserName && !returningPassword){console.error('please enter your password');return;}
+		if(!newUserName && !returningUserName){setErrorMessage('Please enter a name');return;}
+		else if(newUserName && returningUserName){setErrorMessage('Please select 1 option');return;}
+		else if(newUserName && !newPassword){setErrorMessage('Please enter a new password');return;}
+		else if(returningUserName && !returningPassword){setErrorMessage('Please enter your password');return;}
 	// If new user name and password, check to see if it already exists - if not, creat new user object in localStorage (GlobalState)
 		else if(newUserName && newPassword) {
-			if(userData[newUserName]){console.error(`user name ${newUserName} already exists`);return;}
+			if(userData[newUserName]){setErrorMessage(`User name ${newUserName} already exists`);return;}
 			else {
 				console.log('setting new user');
 				addNewUser(newUserName, newPassword);
@@ -49,8 +51,8 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 			} 
 	//If returning user name and password, check to see if it already exists, if so, set that user in the global state, if not, return an error
 		} else if(returningUserName && returningPassword) {
-			if(!userData[returningUserName]){console.error(`user name ${returningUserName} doesn't exist. Please check and try again!`);return;}
-			else if(userData[returningUserName].password !== returningPassword){console.error('password incorrect. Please check and try again.');return;}
+			if(!userData[returningUserName]){setErrorMessage(`User name ${returningUserName} doesn't exist. Please check and try again!`);return;}
+			else if(userData[returningUserName].password !== returningPassword){setErrorMessage('Password incorrect. Please check and try again.');return;}
 			else {
 				setCurrentUser(returningUserName);
 				console.log(`signed in as user: ${returningUserName}`);
@@ -64,6 +66,14 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 		console.log('current user:', currentUser);
 	}, [currentUser]);
 
+	useEffect(() => {
+		if(errorMessage === false )return;
+		else{
+			setTimeout(() => {
+				setErrorMessage(false); 
+			}, 2000);
+		}
+	}, [errorMessage])
 
 	return (
 			/* HTML */
@@ -82,14 +92,14 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 			        {/*  Modal Title */}
 			        <div className="sm:flex sm:items-start">
 			          <div className="mt-3 text-center flex flex-col items-center ">
-			            <h3 className="text-lg leading-6 font-semibold text-gray-900" id="modal-title">
+			            <h3 className=" mb-3 text-lg leading-6 font-semibold text-gray-900" id="modal-title">
 			              Select User
 			            </h3>
 			            {/*  Modal Body */}
 			            <div className="mt-2 h-[240px] w-[470px] flex flex-col items-around justify-around">
 			            {/*Existing User */}
-			              <div className="h-[60px] flex items-center justify-start">
-			              	<p className="text-medium font-semibold m-1 p-2">Returning:</p>
+			              <div className="h-[60px] flex items-center justify-start mt-4">
+			              	<p className="text-lg font-semibold m-1 p-2">Returning:</p>
 			        		<input className='h-[50px] w-[150px] m-2 p-2 border border-blue-100 rounded-md' 
 			        			    placeholder='Enter user name'
 			        			    onChange={handleReturningUser}>
@@ -99,9 +109,14 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 			        			    onChange={handleReturningPassword}>
 			        		</input>		        				
 			              </div>
+			              {/*ERROR MESSAGE DIV */}
+			              {errorMessage === false ? <div className='h-[40px] m-2'></div>  
+			              						  : <div className='h-[40px] w-[450px] m-2 p-1 bg-red-300 border border-red-400 rounded-md italic font-semibold'>{errorMessage}</div>
+
+			              }
 			              {/*New User */}
 			              <div className="h-[60px] flex items-center justify-start">
-			              	<p className="text-medium font-semibold m-1 p-2">New:</p>
+			              	<p className="text-lg font-semibold m-1 p-2 mr-11">New:</p>
 			        		<input className='h-[50px] w-[150px] m-2 p-2 border border-blue-100 rounded-md' 
 			        			    placeholder='Enter user name'
 			        			    onChange={handleNewUser}>

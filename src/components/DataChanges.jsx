@@ -8,6 +8,7 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 	const [ progressArray, setProgressArray ] = useState('');
 	const {  currentDataCat, dateRange } = useContext(GlobalContext);
 	const [ units, setUnits ] = useState('');
+	const [ notable, setNotable] = useState(false); 
 
 
 
@@ -116,6 +117,22 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 		compareArrays(exerciseArray, sessionObject); 
 	} 
 
+
+//Check for any notable improvements in results array. If so, push to setNoteworthy useState
+	const checkForNotable = (resultsArray) => {
+		let maxValue = 0; 
+		let n = ''
+		for(let i = 0; i < resultsArray.length; i ++) {
+			if(resultsArray[i].result > maxValue) {
+				maxValue = resultsArray[i].result;
+				n = resultsArray[i];
+			}
+		}
+		console.log(notable); 
+		setNotable(n); 
+	}
+
+
 //Function to compare current exercise data array with previous exercise data array. Triggered by change in pastData useState
 //loop through each category, comparing numbers of current and past exercies periods. If there is a difference, push as object to resultsArray 
 	const compareArrays = (exerciseArray, object) => {
@@ -141,7 +158,9 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 		}
 		console.log('results array:', resultsArray);
 		setProgressArray(resultsArray);
+		checkForNotable(resultsArray);
 	}
+
 
 	useEffect(() => {
 		datesToCompare();
@@ -162,21 +181,26 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 	}, [pastData]);
 
 
-	const divClassPlus = 'h-[80px] w-[350px] bg-green-200 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'; 
-	const divClassMinus = 'h-[80px] w-[350px] bg-red-200 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'; 
+	const divClassPlus = 'h-[80px] w-[350px] bg-emerald-200 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
+	const divClassMinus = 'h-[80px] w-[350px] bg-red-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
 
 	return (
 		<>
 		<Test/>
-		<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
-			<h1 className='p-2 text-lg font-semibold'>PROGRESS</h1>
+		<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
+			<h1 className='p-2 text-lg font-semibold text-blue-400'>PROGRESS</h1>
 			<div className='text-blue-300 italic font-semibold'>vs previous {dateRange}</div>
 			{ progressArray.length !== 0 ?
 				(progressArray.map((a, index) => (
 					<div key={index}>
-					 {a.result > 0 ? (<div className={divClassPlus}>{a.name} + {a.result}<span className='text-base p-1'>{units}</span></div>)  : (<div className={divClassMinus}>{a.name} {a.result}<span className='text-base p-1'>{units}</span></div>)  }
+					 {a.result > 0 ? (<div className={divClassPlus}><span className= 'p-2'>{a.name}:</span> <span className= 'p-1'>+{a.result}</span><span className='text-base p-1'>{units}</span></div>)  
+					 			   : (<div className={divClassMinus}><span className= 'p-2'>{a.name}:</span><span className= 'p-1'> {a.result}</span><span className='text-base p-1'>{units}</span></div>)  }
                     </div>))
 				) : (<div className='h-[400px] w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'>No Changes!</div>) 
+			}
+			{ notable === false ? ''
+					  : <div className=' mt-10 p-2 text-lg font-semibold italic text-blue-400'>You're crushing the {notable.name}! Keep it up!</div>
+
 			}
 		</div>
 		</>

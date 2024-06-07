@@ -24,7 +24,7 @@ const Logbody = () => {
 	return (
 		<>{/* View Daily Log / Data Select Options / Data View Options*/}
 		 	{currentView === 'byDate' ? (		
-				  <div className='h-[720px] bg-blue-400'> 
+				  <div className='h-[720px] bg-blue-400 shadow-md'> 
 					<LogHeader/>
 					<div className='h-[280px] flex justify-around m-4'>
 						<LogCardio/>
@@ -40,7 +40,7 @@ const Logbody = () => {
 	 			)
 
 				: currentView === 'dataSelect' ? (
-				  <div className='h-[720px] bg-blue-400'> 
+				  <div className='h-[720px] bg-blue-400 shadow-md'> 
 				 	<DataSelectHeader/>
 					<div className='h-[400px] flex justify-around m-4'>
 						<SelectCardio/>

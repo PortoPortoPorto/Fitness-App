@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState.jsx';  
 
 const NavLogout = () => {
-	const { setUser, resetState, setCurrentUser } = useContext(GlobalContext);
+	const { setUser, resetState, setCurrentUser, setCurrentView } = useContext(GlobalContext);
 	const reset = () => {
 		setCurrentUser('userId1');
+		setCurrentView('byDate'); 
 	}
 
 	return (

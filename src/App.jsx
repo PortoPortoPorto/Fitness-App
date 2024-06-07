@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <GlobalProvider>
-        <div className='bg-blue-100'>
+        <div className='bg-gradient-to-r from-white to-blue-200'>
          <Header/>
          <Nav/>
          <Logbody/>
