@@ -96,34 +96,37 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 			              Select User
 			            </h3>
 			            {/*  Modal Body */}
-			            <div className="mt-2 h-[240px] w-[470px] flex flex-col items-around justify-around">
+			            <div className="mt-2 h-[300px] sm:h-[240px] w-[470px] flex flex-col items-center sm:items-around justify-center sm:justify-around">
 			            {/*Existing User */}
-			              <div className="h-[60px] flex items-center justify-start mt-4">
-			              	<p className="text-lg font-semibold m-1 p-2">Returning:</p>
-			        		<input className='h-[50px] w-[150px] m-2 p-2 border border-blue-100 rounded-md' 
-			        			    placeholder='Enter user name'
-			        			    onChange={handleReturningUser}>
-			        		</input>
-			        		<input className='h-[50px] w-[150px] m-2 p-2 border border-blue-100 rounded-md' 
-			        			    placeholder='Enter password'
-			        			    onChange={handleReturningPassword}>
-			        		</input>		        				
-			              </div>
-			              {/*ERROR MESSAGE DIV */}
-			              {errorMessage === false ? <div className='h-[40px] m-2'></div>  
-			              						  : <div className='h-[40px] w-[450px] m-2 p-1 bg-red-300 border border-red-400 rounded-md italic font-semibold'>{errorMessage}</div>}
-			              {/*New User */}
-			              <div className="h-[60px] flex items-center justify-start">
-			              	<p className="text-lg font-semibold m-1 p-2 mr-11">New:</p>
-			        		<input className='h-[50px] w-[150px] m-2 p-2 border border-blue-100 rounded-md' 
-			        			    placeholder='Enter user name'
-			        			    onChange={handleNewUser}>
-			        		</input>
-			        		<input className='h-[50px] w-[150px] m-2 p-2 border border-blue-100 rounded-md' 
-			        			    placeholder='Enter password'
-			        			    onChange={handleNewPassword}>
-			        		</input>		        				
-			              </div>
+				            <div className='h-[200px] w-450px] sm:w-[100%] flex flex-row sm:flex-col justify-center items-between p-1 sm:items-center justify-start'>  
+				              <div className=" flex flex-col sm:flex-row items-center p-1 sm:items-center justify-start ml-3 mr-1 sm:mt-4">
+				              	<p className="text-lg font-semibold m-1 p-1 sm:m-2 sm:p-2">Returning:</p>
+				        		<input className='h-[50px] w-[130px] m-1 p-1 sm:m-2 sm:p-2 border border-blue-100 rounded-md' 
+				        			    placeholder='Enter user name'
+				        			    onChange={handleReturningUser}>
+				        		</input>
+				        		<input className='h-[50px] w-[130px] m-1 p-1 sm:m-2 sm:p-2 border border-blue-100 rounded-md' 
+				        			    placeholder='Enter password'
+				        			    onChange={handleReturningPassword}>
+				        		</input>		        				
+				              </div>
+				         
+				              {/*New User */}
+				              <div className="flex flex-col sm:flex-row items-center p-1 sm:items-center justify-start ml-0 mr-2 sm:mt-4">
+				              	<p className="text-lg font-semibold m-1 p-1 sm:m-2 sm:p-2">New:</p>
+				        		<input className='h-[50px] w-[130px] m-1 p-1 sm:m-2 sm:p-2border border-blue-100 rounded-md' 
+				        			    placeholder='Enter user name'
+				        			    onChange={handleNewUser}>
+				        		</input>
+				        		<input className='h-[50px] w-[130px] m-1 p-1 sm:m-2 sm:p-2 border border-blue-100 rounded-md' 
+				        			    placeholder='Enter password'
+				        			    onChange={handleNewPassword}>
+				        		</input>		        				
+				              </div>
+				            </div>  
+ 						{/*ERROR MESSAGE DIV */}
+			            {errorMessage === false ? <div className='h-[40px] m-2'></div>  
+			              						  : <div className='h-[40px] w-[260px] sm:w-[450px] m-2 p-1 bg-red-300 border border-red-400 rounded-md italic font-semibold'>{errorMessage}</div>}			              
 			            </div>
 			          </div>
 			        </div>

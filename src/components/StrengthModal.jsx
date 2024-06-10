@@ -70,13 +70,13 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 	{errorMessage === false ? <div className='h-[40px] m-1 p-1'><h3 className="text-lg leading-6 font-semibold text-gray-900" id="modal-title">
 			                      Select Strength Exercise
 			            	  </h3></div>
-			              	: <div className='h-[40px] w-[300px] m-1 p-1 bg-red-300 border border-red-400 rounded-md italic text-lg font-semibold'>
+			              	: <div className='h-[40px] w-[280px] sm:w-[300px] m-1 p-1 bg-red-300 border border-red-400 rounded-md italic text-lg font-semibold'>
 			              		 {errorMessage}
 			              	  </div>}
 		            {/*  Modal Description */}
 		            <div className="mt-2 h-[260px] w-[350px] flex flex-col items-start justify-start">
-		              <div className="h-[70px] flex items-center justify-around m-2">
-		              	<p className="text-medium font-semibold p-2 mr-20">Type:</p>
+		              <div className="h-[70px] flex items-center justify-around m-1 sm:m-2">
+		              	<p className="text-medium font-semibold p-2 mr-16 sm:mr-20">Type:</p>
 		        		<select className='h-[50px] w-[150px] border border-blue-100 rounded-md' 
 		        				placeholder='Select Exercise'
 		        				onChange={(e) => setExercise(e.target.value)}
@@ -89,8 +89,8 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 		        			<option>Crunches</option>
 		        		</select>		        				
 		              </div>
-		              <div className="h-[70px] flex items-center justify-around m-2">
-		              	<p className="text-medium font-semibold p-2 mr-10">Total Reps:</p>
+		              <div className="h-[70px] flex items-center justify-around m-1 sm:m-2">
+		              	<p className="text-medium font-semibold p-2 mr-4 sm:mr-10">Total Reps:</p>
 		              	<input className='h-[50px] w-[135px] rounded-md p-2 mr-2' type='text' 
 		              		   placeholder='enter reps'
 		              		   onChange={(e) => setReps(e.target.value)}> 
@@ -98,7 +98,7 @@ const StrengthModal = ({modalToggled, setModalToggled}) => {
 		              	<p className="text-medium font-semibold">Reps</p>
 		              </div>
 		              <div className="h-[80px] flex items-center justify-around m-2">
-		              	<p className="text-medium font-semibold p-2 mr-12">Notes:</p>
+		              	<p className="text-medium font-semibold p-2 mr-0 sm:mr-12">Notes:</p>
 		              	<input className='h-[80px] rounded-md p-2 ml-5' type='text' 
 		              		   placeholder='enter notes'
 		              		   onChange={(e) => setNotes(e.target.value)}> 		              		

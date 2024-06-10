@@ -3,15 +3,17 @@ import { GlobalContext } from '../context/GlobalState.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faBars} from '@fortawesome/free-solid-svg-icons'; 
 
-const NavLogout = () => {
+const NavLogout = ({ dropdown, setDropdown }) => {
 	const { setUser, resetState, setCurrentUser, setCurrentView } = useContext(GlobalContext);
+
 	const reset = () => {
 		setCurrentUser('userId1');
 		setCurrentView('byDate'); 
 	}
 
 const toggleDropdown = () => {
-	console.log('toggling that dropdown fool')
+	dropdown === false ? setDropdown(true) : setDropdown(false);
+	console.log('toggling that dropdown.. status:', dropdown); 
 }	
 
 	return (

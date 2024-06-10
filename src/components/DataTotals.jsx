@@ -80,7 +80,7 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 	}		
 	
 
-	const divClass = 'h-[80px] w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
+	const divClass = 'h-[80px] w-[320px] sm:w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
 	const buttonClass = 'btn bg-blue-500 h-[35px] w-[100px] rounded-lg font-semibold text-white border-2 border-blue-300 hover:border-white'
 
 
@@ -89,7 +89,7 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 		  {chartDisplay === false ? 
 
 			  	currentDataCat > 2 ? 
-			  	 (<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
+			  	 (<div className='bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
 					<h1 className='p-2 text-lg font-semibold text-blue-400'>TOTALS</h1>	
 						{ sessionObject.Yoga > 0 ? <div className={divClass}> Yoga: {sessionObject.Yoga}<span className='text-base p-1'>mins</span></div> : ''}
 						{ sessionObject.Pilates > 0 ? <div className={divClass}>Pilates : {sessionObject.Pilates}<span className='text-base p-1'>mins</span></div> : ''}
@@ -100,7 +100,7 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 				  	</div>)
 			  	:
 			    currentDataCat > 1 ?	 
-				  	(<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
+				  	(<div className='bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
 					<h1 className='p-2 text-lg font-semibold text-blue-400'>TOTALS</h1>	
 						{ strengthObject.Pushups > 0 ? <div className={divClass}> Pushups: {strengthObject.Pushups}</div> : ''}
 						{ strengthObject.Squats > 0 ? <div className={divClass}>Squats : {strengthObject.Squats}</div> : ''}
@@ -111,7 +111,7 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 						<button className={buttonClass} onClick={toggleChartDisplay}>Chart</button>
 				  	</div>)
 				:   
-					(<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
+					(<div className='bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
 						<h1 className='p-2 text-lg font-semibold text-blue-400'>TOTALS</h1>	
 						{ cardioObject.Running > 0 ? <div className={divClass}>Running: {cardioObject.Running}<span className='text-base p-1'>km</span></div> : ''}
 						{ cardioObject.Swimming > 0 ? <div className={divClass}>Swimming : {cardioObject.Swimming}<span className='text-base p-1'>km</span></div> : ''}
@@ -120,10 +120,10 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 						{ cardioObject.Walking > 0 ? <div className={divClass}>Walking: {cardioObject.Walking}<span className='text-base p-1'>km</span></div> : ''}
 						<button className={buttonClass} onClick={toggleChartDisplay}>Chart</button>
 				  </div>)
-		    : <div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
+		    : <div className='bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
 		    	<h1 className='p-2 text-lg text-blue-400 font-semibold'>TOTALS CHART</h1>
-		    	<div className='h-[470px] w-[400px] flex flex-col justify-center items-center'>
-		    		<BarChart width={380} height={370} data={barChartArray}>
+		    	<div className='h-[470px] w-[350px] sm:w-[400px] flex flex-col justify-center items-center'>
+		    		<BarChart width={330} height={370} data={barChartArray}>
 		    			<YAxis/>
 		    			<XAxis dataKey='name'/>
 		    			<Tooltip content={<CustomToolTip/>} />

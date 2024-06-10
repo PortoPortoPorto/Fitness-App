@@ -182,13 +182,13 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 	}, [pastData]);
 
 
-	const divClassPlus = 'h-[80px] w-[350px] bg-emerald-200 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
-	const divClassMinus = 'h-[80px] w-[350px] bg-red-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
+	const divClassPlus = 'h-[80px] w-[320px] sm:w-[350px] bg-emerald-200 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
+	const divClassMinus = 'h-[80px] w-[320px] sm:w-[350px] bg-red-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
 
 	return (
 		<>
 		<Test/>
-		<div className='bg-blue-100 h-[500px] w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
+		<div className='bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
 			<h1 className='p-2 text-lg font-semibold text-blue-400'>PROGRESS</h1>
 			<div className='text-blue-300 italic font-semibold'>vs previous {dateRange}</div>
 			{ progressArray.length !== 0 ?
@@ -197,10 +197,10 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 					 {a.result > 0 ? (<div className={divClassPlus}><span className= 'p-2'>{a.name}:</span> <span className= 'p-1'>+{a.result}</span><span className='text-base p-1'>{units}</span></div>)  
 					 			   : (<div className={divClassMinus}><span className= 'p-2'>{a.name}:</span><span className= 'p-1'> {a.result}</span><span className='text-base p-1'>{units}</span></div>)  }
                     </div>))
-				) : (<div className='h-[400px] w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'>No Changes!</div>) 
+				) : (<div className='h-[400px] w-[350px] sm:w-[400px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold'>No Changes!</div>) 
 			}
 			{ notable === false ? ''
-					  : <div className=' mt-10 p-2 text-lg font-semibold italic text-blue-400'>You're crushing the {notable.name}! Keep it up!</div>
+					  : <div className=' mt-10 p-2 sm:text-lg font-semibold italic text-blue-400'>You're crushing the {notable.name}! Keep it up!</div>
 
 			}
 		</div>

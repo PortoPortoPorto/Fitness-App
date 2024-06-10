@@ -13,6 +13,7 @@ library.add(fas, far);
 
 function App() {
   const [count, setCount] = useState(0)
+  const [ dropdown, setDropdown ] = useState(false);
 
 
   return (
@@ -20,8 +21,8 @@ function App() {
       <GlobalProvider>
         <div className='bg-gradient-to-r from-white to-blue-200'>
          <Header/>
-         <Nav/>
-         <Logbody/>
+         <Nav dropdown={dropdown} setDropdown={setDropdown}/>
+         <Logbody dropdown={dropdown} setDropdown={setDropdown}/>
          <Footer/>
         </div>
       </GlobalProvider>

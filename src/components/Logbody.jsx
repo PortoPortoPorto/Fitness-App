@@ -17,7 +17,7 @@ import DataBody from './DataBody.jsx';
 
 
 
-const Logbody = () => {
+const Logbody = ({ dropdown, setDropdown }) => {
 	const { strengthData, cardioData, sessionData, currentView } = useContext(GlobalContext); 
 
 
@@ -25,14 +25,14 @@ const Logbody = () => {
 		<>{/* View Daily Log / Data Select Options / Data View Options*/}
 		 	{currentView === 'byDate' ? (		
 				  <div className='h-[1000px] bg-blue-400 shadow-md md:h-[720px]'> 
-					<LogHeader/>
+					<LogHeader dropdown={dropdown} setDropdown={setDropdown}/>
 					<div className='flex flex-row md:flex md:flex-col justify-center'>
-						<div className='h-[800px] flex flex-col justify-around m-4 md:flex md:flex-row md:h-[280px]'>
+						<div className='h-[800px] flex flex-col justify-around m-[2px] sm:m-4 md:flex md:flex-row md:h-[280px]'>
 							<LogCardio/>
 							<LogStrength/>
 							<LogSessions/>
 						</div>
-						<div className='h-[800px] flex flex-col justify-around m-4 md:flex md:flex-row md:h-[280px]'>
+						<div className='h-[800px] flex flex-col justify-around m-[2px] sm:m-4 md:flex md:flex-row md:h-[280px]'>
 							<LoggedCardio/>
 							<LoggedStrength/>
 							<LoggedSessions/>
@@ -42,9 +42,9 @@ const Logbody = () => {
 	 			)
 
 				: currentView === 'dataSelect' ? (
-				  <div className='h-[1400px] bg-blue-400 shadow-md md:h-[720px] flex flex-col justify-start items-center'> 
-				 	<DataSelectHeader/>
-					<div className='h-[800px] flex flex-col justify-around m-4 md:flex md:flex-row md:h-[400px] md:w-[1000px] md:justify-around'>
+				  <div className='h-[1400px] bg-blue-400 shadow-md lg:h-[720px] flex flex-col justify-start items-center'> 
+				 	<DataSelectHeader dropdown={dropdown} setDropdown={setDropdown}/>
+					<div className='h-[800px] flex flex-col justify-around m-4  lg:flex lg:flex-row lg:h-[400px] lg:w-[1000px] lg:justify-around'>
 						<SelectCardio/>
 						<SelectStrength/>
 						<SelectSessions/>
@@ -52,7 +52,7 @@ const Logbody = () => {
 				  </div>) 
 
 				: (	<div className='h-[1800px] bg-blue-400 shadow-md xl:h-[720px] flex flex-col justify-start items-center'> 
-				 	<DataHeader/>	
+				 	<DataHeader dropdown={dropdown} setDropdown={setDropdown}/>	
 					<DataBody/>
 				  </div>) 
 		    } 		  
