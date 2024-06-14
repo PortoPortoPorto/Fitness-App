@@ -16,56 +16,31 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 
 //Push totals of all exercises in current category into chartData array, and set barChartArray with the result
 	const createChartObjects = (currentDataCat) => {
-			if(currentDataCat === 1){
-				const chartData = [];
-				const chartCategories = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking'];
-
-					chartCategories.forEach((category) => {
-						console.log(`chart category: ${category}`, cardioObject[category]);
-						if(cardioObject[category] > 0) {
-							let dataObject = {
-									name: category,
-									reps: cardioObject[category][0]
-							}
-							chartData.push(dataObject)
-						}
-					});
-					setBarChartArray(chartData);	
-		
+			let chartData = [];
+			let chartCategories = [];
+			let chartObject = ''; 
+//Set chartCategories and chartObject depending on the current data category
+			if(currentDataCat === 1) {
+				chartCategories = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking'];
+				chartObject = cardioObject;		
 			} else if(currentDataCat === 2) {
-				const chartData = [];
-				const chartCategories = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls', 'Crunches'];
-
-					chartCategories.forEach((category) => {
-						console.log(`chart category: ${category}`, strengthObject[category]);
-						if(strengthObject[category] > 0) {
-							let dataObject = {
-									name: category,
-									reps: strengthObject[category][0]
-							}
-							chartData.push(dataObject)
-						}
-					});
-
-					setBarChartArray(chartData);	
-
+				chartCategories = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls', 'Crunches'];
+				chartObject = strengthObject;		
 			} else if(currentDataCat === 3) {
-				const chartData = [];
-				const chartCategories = ['Yoga', 'Pilates', 'Spin', 'Zumba', 'Boxing'];
-
+				chartCategories = ['Yoga', 'Pilates', 'Spin', 'Zumba', 'Boxing'];
+				chartObject = sessionObject;		
+			}
 					chartCategories.forEach((category) => {
-						console.log(`chart category: ${category}`, sessionObject[category]);
-						if(sessionObject[category] > 0) {
+						console.log(`chart category: ${category}`, chartObject[category]);
+						if(chartObject[category] > 0) {
 							let dataObject = {
 									name: category,
-									reps: sessionObject[category][0]
+									reps: chartObject[category][0]
 							}
 							chartData.push(dataObject)
 						}
 					});
-
-					setBarChartArray(chartData);
-			}
+					setBarChartArray(chartData);			
 		}
 
 	const CustomToolTip = ({ payload, label, active }) => {

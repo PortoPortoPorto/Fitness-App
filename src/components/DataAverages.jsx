@@ -7,6 +7,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 	const [ chartDisplay, setChartDisplay ] = useState(false);
 	const [ barChartArray, setBarChartArray ] = useState('');
 
+
 	const toggleChartDisplay = () => {
 	    createChartObjects(currentDataCat);
 	    if(chartDisplay === false)setChartDisplay(true);
@@ -17,7 +18,6 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 	const chartAverages = (exercise, units,) => {
  		let dayNumber = days;
  		let average = Math.round(exercise / dayNumber);
- 		console.log(average);
  		return average; 
 	}
 
@@ -25,50 +25,28 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 
 //Push averages (chartAverages function) of all exercises in current category into chartData array, and set barChartArray with the result
 	const createChartObjects = (currentDataCat) => {
+				let chartCategories = [];
+				let chartData = [];
+				let chartObject = '';
+				let measurement = 'reps';
+//Set chartCategories, chartObject and measurement depending on the current data category
 				if(currentDataCat === 1){
-					const chartData = []
-					const chartCategories = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking'];
-
-					chartCategories.forEach((category) => {
-						console.log(`chart category: ${category}`, cardioObject[category]);
-						if(cardioObject[category] > 0) {
-							let dataObject = {
-									name: category,
-									reps: chartAverages(cardioObject[category], 'km')
-							}
-							chartData.push(dataObject)
-						}
-					});
-
-					setBarChartArray(chartData);	
-		
+					chartCategories = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking'];
+					const chartObject = cardioObject;
+					measurement = 'km';			
 				} else if(currentDataCat === 2) {
-					const chartData = [];
-					const chartCategories = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls', 'Crunches'];
-
-					chartCategories.forEach((category) => {
-						console.log(`chart category: ${category}`, strengthObject[category]);	
-						if(strengthObject[category] > 0) {
-							let dataObject = {
-								name: category,
-								reps: chartAverages(strengthObject[category], 'km')
-							}
-							chartData.push(dataObject);
-						}				
-					});
-
-					setBarChartArray(chartData);
-
+					chartCategories = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls', 'Crunches'];
+					chartObject = strengthObject;	
 				} else if(currentDataCat === 3) {
-					const chartData = [];
-					const chartCategories = ['Yoga', 'Pilates', 'Spin', 'Zumba', 'Boxing'];
-
-					chartCategories.forEach((category) => {
-						console.log(`chart category: ${category}`, sessionObject[category]);	
-						if(sessionObject[category] > 0) {
+					chartCategories = ['Yoga', 'Pilates', 'Spin', 'Zumba', 'Boxing'];
+					chartObject = sessionObject;
+					measurement = 'mins';	
+				}
+					chartCategories.forEach((category) => {	
+						if(chartObject[category] > 0) {
 							let dataObject = {
 								name: category,
-								reps: chartAverages(sessionObject[category], 'mins')
+								reps: chartAverages(chartObject[category], measurement)
 							}
 							chartData.push(dataObject);
 						}				
@@ -76,9 +54,9 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 
 					setBarChartArray(chartData);		
 				}
-			}
+			
 
-
+//custom tool tip when mouse hovers over bar chart element 
 	const CustomToolTip = ({ payload, label, active }) => {
 		if(active) {
 			return (
@@ -90,7 +68,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 		}
 	}
 
-
+	const dataContainer = 'bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md';
 	const divClass = 'h-[80px] w-[320px] sm:w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
 	const buttonClass = 'btn bg-blue-500 h-[35px] w-[100px] rounded-lg font-semibold text-white border-2 border-blue-300 hover:border-white'
 
@@ -98,7 +76,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 		<>
 		    {chartDisplay === false ? 
 			 	currentDataCat > 2 ? 
-			  	 (<div className='bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
+			  	 (<div className={dataContainer}>
 					<h1 className='p-2 text-lg font-semibold text-blue-400'>AVERAGES</h1>	
 						{ sessionObject.Yoga > 0 ? <div className={divClass}> Yoga:{Math.round(sessionObject.Yoga / days)}<span className='text-base p-1'>mins per day</span></div> : ''}
 						{ sessionObject.Pilates > 0 ? <div className={divClass}>Pilates : {Math.round(sessionObject.Pilates / days)}<span className='text-base p-1'>mins per day</span></div> : ''}
@@ -109,7 +87,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 				  	</div>)
 			  	:
 			    currentDataCat > 1 ?	 
-				  	(<div className='bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
+				  	(<div className={dataContainer}>
 					<h1 className='p-2 text-lg font-semibold text-blue-400'>AVERAGES</h1>	
 						{ strengthObject.Pushups > 0 ? <div className={divClass}> Pushups: {Math.round(strengthObject.Pushups / days)}<span className='text-base p-1'>per day</span></div> : ''}
 						{ strengthObject.Squats > 0 ? <div className={divClass}>Squats : {Math.round(strengthObject.Squats / days)}<span className='text-base p-1'>per day</span></div> : ''}
@@ -120,7 +98,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 						<button className={buttonClass} onClick={toggleChartDisplay}>Chart</button>
 				  	</div>)
 				:   
-					(<div className='bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center shadow-md'>
+					(<div className={dataContainer}>
 						<h1 className='p-2 text-lg font-semibold text-blue-400'>DAILY AVERAGES</h1>	
 						{ cardioObject.Running > 0 ? <div className={divClass}>Running: {Math.round(cardioObject.Running / days)}<span className='text-base p-1'>km</span></div> : ''}
 						{ cardioObject.Swimming > 0 ? <div className={divClass}>Swimming : {Math.round(cardioObject.Swimming / days)}<span className='text-base p-1'>km</span></div> : ''}
@@ -132,7 +110,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 
  			:   
  				<div className='bg-blue-100 h-[500px] w-[350px] sm:w-[400px] m-7 rounded-lg border-8 border-blue-300 flex flex-col justify-start items-center'>
-		    	<h1 className='p-2 text-lg text-blue-400 font-semibold'>AVERAGES CHART</h1>
+		    	<h1 className='p-2 text-lg text-blue-400 font-semibold'>DAILY AVERAGES CHART</h1>
 		    	<div className='h-[470px] w-[350px] sm:w-[400px] flex flex-col justify-center items-center'>
 		    		<BarChart width={330} height={370} data={barChartArray}>
 		    			<YAxis/>

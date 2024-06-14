@@ -89,7 +89,7 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 	}
 
 	const filterPastObject = (pastObject, exerciseArray, measurement, filteredCompObject) => {
-			console.log(filteredCompObject, measurement);
+//get all the same exercises from the filteredCompObject, and reduce them to the sum of whatever measurement is required. Push to the past object
 			for(let i = 0; i < exerciseArray.length; i ++) {
 			let filteredCat = filteredCompObject
 				.filter((d) => d.exercise === exerciseArray[i])
@@ -128,7 +128,6 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 				n = resultsArray[i];
 			}
 		}
-		console.log(notable); 
 		if(n === '')return;
 		else setNotable(n);
 	}
@@ -141,7 +140,6 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 		for(let i = 0; i < exerciseArray.length; i ++) {
 			let cat = exerciseArray[i];
 			let result = object[`${cat}`] - pastData[`${cat}`];
-			console.log('cat:', cat, object[`${cat}`], 'take',  pastData[`${cat}`], 'result:', result)
 			if(result < 0) {
 				const changeObject = {
 					name: cat,
@@ -157,7 +155,6 @@ const DataChanges = ({strengthObject, cardioObject, sessionObject, dataCat}) => 
 					resultsArray.push(changeObject);
 			}					
 		}
-		console.log('results array:', resultsArray);
 		setProgressArray(resultsArray);
 		checkForNotable(resultsArray);
 	}

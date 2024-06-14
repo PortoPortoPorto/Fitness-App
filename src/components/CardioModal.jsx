@@ -12,7 +12,6 @@ const CardioModal = ({modalToggled, setModalToggled}) => {
 	const { cardioData, addCardioExercise, exerciseDate, currentUser } = useContext(GlobalContext);
 
 	const modalOff = () => {
-		console.log('modal off!');
 		setModalToggled(false);  
 	}
 

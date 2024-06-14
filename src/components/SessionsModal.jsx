@@ -12,7 +12,6 @@ const SessionsModal = ({modalToggled, setModalToggled}) => {
 	const { sessionData, addSessionExercise, exerciseDate, currentUser } = useContext(GlobalContext); 
 
 	const modalOff = () => {
-		console.log('modal off!');
 		setModalToggled(false);  
 	}
 

@@ -7,11 +7,10 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 	const [ newPassword, setNewPassword ] = useState('');
 	const [ returningPassword, setReturningPassword ] = useState('');
 	const [ errorMessage, setErrorMessage ] = useState(false); 
-	const { userData, addNewUser, currentUser, setCurrentUser } = useContext(GlobalContext);
+	const { userData, addNewUser, currentUser, setCurrentUser, setCurrentView } = useContext(GlobalContext);
 
 
 	const modalOff = () => {
-		console.log('modal off!')
 		setModalToggled(false);
 	}
 
@@ -33,7 +32,7 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 
 
 	const userCheck = () => {
-		console.log('checking user:', userData);
+//check if the correct combination of fields have been filled		
 		if(!newUserName && !returningUserName){setErrorMessage('Please enter a name');return;}
 		else if(newUserName && returningUserName){setErrorMessage('Please select 1 option');return;}
 		else if(newUserName && !newPassword){setErrorMessage('Please enter a new password');return;}
@@ -42,11 +41,11 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 		else if(newUserName && newPassword) {
 			if(userData[newUserName]){setErrorMessage(`User name ${newUserName} already exists`);return;}
 			else {
-				console.log('setting new user');
 				addNewUser(newUserName, newPassword);
 				console.log(`new user set: NAME: ${newUserName} PASSWORD: ${newPassword}`);
 				setCurrentUser(newUserName);
 				console.log(`signed in as user: ${newUserName}`);
+				setCurrentView('byDate'); 
 
 			} 
 	//If returning user name and password, check to see if it already exists, if so, set that user in the global state, if not, return an error
@@ -56,15 +55,11 @@ const UserModal = ({modalToggled, setModalToggled}) => {
 			else {
 				setCurrentUser(returningUserName);
 				console.log(`signed in as user: ${returningUserName}`);
+				setCurrentView('byDate'); 
 			} 
 		} 
 		modalOff();
 	}
-
-
-	useEffect(() => {
-		console.log('current user:', currentUser);
-	}, [currentUser]);
 
 	useEffect(() => {
 		if(errorMessage === false )return;
