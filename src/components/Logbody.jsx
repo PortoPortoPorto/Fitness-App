@@ -18,7 +18,7 @@ import DataBody from './DataBody.jsx';
 
 
 const Logbody = ({ dropdown, setDropdown }) => {
-	const { strengthData, cardioData, sessionData, currentView } = useContext(GlobalContext); 
+	const { strengthData, cardioData, sessionData, currentView, userData} = useContext(GlobalContext); 
 
 
 	return (

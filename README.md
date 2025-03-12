@@ -1,8 +1,23 @@
-# React + Vite
+# Fitness Tracker App 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview 
+A simple ReactJS app for logging and tracking exercise data over time, built to practice front-end development and data visualisation. 
 
-Currently, two official plugins are available:
+## Features
+- Basic login with username and password (stored locally).
+- Log daily exercise data for cardio, strength, and session-based workouts.
+- Data visualisation with charts to track improvements and averages over time.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies
+- ReactJS (Vite)
+- TailwindCSS
+- Recharts 
+
+## Installation
+- Ensure Node.js is installed (v16+ recommended).
+- `npm install` to install dependencies.
+- `npm run dev` to launch app locally.
+
+## What I Learned
+- Managing state in React for dynamic data updates.
+- Integrating Recharts for simple data visualisation.

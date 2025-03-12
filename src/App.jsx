@@ -10,7 +10,6 @@ import { GlobalProvider } from './context/GlobalState.jsx';
 
 library.add(fas, far); 
 
-
 function App() {
   const [count, setCount] = useState(0)
   const [ dropdown, setDropdown ] = useState(false);

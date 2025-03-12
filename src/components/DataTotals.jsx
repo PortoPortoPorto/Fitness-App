@@ -37,6 +37,7 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 									name: category,
 									reps: chartObject[category][0]
 							}
+							console.log('DATA OBJECT:', dataObject);
 							chartData.push(dataObject)
 						}
 					});

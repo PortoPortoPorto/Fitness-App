@@ -6,22 +6,30 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 	const { currentDataCat, dateRange } = useContext(GlobalContext);
 	const [ chartDisplay, setChartDisplay ] = useState(false);
 	const [ barChartArray, setBarChartArray ] = useState('');
+	const [ dataAvailable, setDataAvailable ] = useState('');
 
 
+//Set chart objects and toggle chart visibility, if no data, simply return. 
 	const toggleChartDisplay = () => {
-	    createChartObjects(currentDataCat);
-	    if(chartDisplay === false)setChartDisplay(true);
+	    console.log('DATA AVAILABLE:', dataAvailable);
+	    if(dataAvailable === false) return;
+	    else if(chartDisplay === false)setChartDisplay(true);
 		else if(chartDisplay === true)setChartDisplay(false);
 	}
 
 
 	const chartAverages = (exercise, units,) => {
+ 		console.log('charting averages')
  		let dayNumber = days;
  		let average = Math.round(exercise / dayNumber);
- 		return average; 
+ 		if(average === NaN) {
+ 			return 0;
+ 		} else {
+ 			return average;  			
+ 		}
 	}
 
-	chartAverages(strengthObject.Squats, 'reps' );
+	
 
 //Push averages (chartAverages function) of all exercises in current category into chartData array, and set barChartArray with the result
 	const createChartObjects = (currentDataCat) => {
@@ -32,7 +40,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 //Set chartCategories, chartObject and measurement depending on the current data category
 				if(currentDataCat === 1){
 					chartCategories = ['Running', 'Swimming', 'Cycling', 'JumpRope', 'Walking'];
-					const chartObject = cardioObject;
+					chartObject = cardioObject;
 					measurement = 'km';			
 				} else if(currentDataCat === 2) {
 					chartCategories = ['Pushups', 'Squats', 'Lunges', 'Presses', 'Curls', 'Crunches'];
@@ -43,18 +51,31 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 					measurement = 'mins';	
 				}
 					chartCategories.forEach((category) => {	
+						console.log(`chart category: ${category}`, chartObject[category]);	
 						if(chartObject[category] > 0) {
 							let dataObject = {
 								name: category,
 								reps: chartAverages(chartObject[category], measurement)
 							}
+							console.log('CURRENT DATA OBJECT', dataObject)
+							setDataAvailable(true);
 							chartData.push(dataObject);
+						} else {
+							setDataAvailable(false);
+							return;
 						}				
 					});
 
 					setBarChartArray(chartData);		
 				}
 			
+
+	useEffect(() => {
+		if(dataAvailable === '') {
+			createChartObjects(currentDataCat);
+		}
+	},[ currentDataCat])
+
 
 //custom tool tip when mouse hovers over bar chart element 
 	const CustomToolTip = ({ payload, label, active }) => {
