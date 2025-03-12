@@ -6,14 +6,12 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 	const { currentDataCat, dateRange } = useContext(GlobalContext);
 	const [ chartDisplay, setChartDisplay ] = useState(false);
 	const [ barChartArray, setBarChartArray ] = useState('');
-	const [ dataAvailable, setDataAvailable ] = useState('');
 
+console.log(strengthObject);
 
 //Set chart objects and toggle chart visibility, if no data, simply return. 
 	const toggleChartDisplay = () => {
-	    console.log('DATA AVAILABLE:', dataAvailable);
-	    if(dataAvailable === false) return;
-	    else if(chartDisplay === false)setChartDisplay(true);
+	    if(chartDisplay === false)setChartDisplay(true);
 		else if(chartDisplay === true)setChartDisplay(false);
 	}
 
@@ -33,6 +31,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 
 //Push averages (chartAverages function) of all exercises in current category into chartData array, and set barChartArray with the result
 	const createChartObjects = (currentDataCat) => {
+				console.log(strengthObject);
 				let chartCategories = [];
 				let chartData = [];
 				let chartObject = '';
@@ -58,23 +57,13 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 								reps: chartAverages(chartObject[category], measurement)
 							}
 							console.log('CURRENT DATA OBJECT', dataObject)
-							setDataAvailable(true);
 							chartData.push(dataObject);
-						} else {
-							setDataAvailable(false);
-							return;
-						}				
+						} 				
 					});
 
 					setBarChartArray(chartData);		
 				}
 			
-
-	useEffect(() => {
-		if(dataAvailable === '') {
-			createChartObjects(currentDataCat);
-		}
-	},[ currentDataCat])
 
 
 //custom tool tip when mouse hovers over bar chart element 
@@ -93,8 +82,12 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 	const divClass = 'h-[80px] w-[320px] sm:w-[350px] bg-blue-300 rounded-lg text-2xl flex justify-center items-center m-2 p-3 font-semibold shadow-md'; 
 	const buttonClass = 'btn bg-blue-500 h-[35px] w-[100px] rounded-lg font-semibold text-white border-2 border-blue-300 hover:border-white'
 
+	// button to insert for each category after bugfix
+	//<button className={buttonClass} onClick={toggleChartDisplay}>Chart</button>
+
 	return (
 		<>
+
 		    {chartDisplay === false ? 
 			 	currentDataCat > 2 ? 
 			  	 (<div className={dataContainer}>
@@ -104,7 +97,7 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 						{ sessionObject.Spin > 0 ? <div className={divClass} >Spin: {Math.round(sessionObject.Spin / days)}<span className='text-base p-1'>mins per day</span></div> : ''}
 						{ sessionObject.Zumba> 0 ? <div className={divClass}>ZUMBA: {Math.round(sessionObject.Zumba/ days)}<span className='text-base p-1'>mins per day</span></div> : ''}
 						{ sessionObject.Boxing > 0 ? <div className={divClass}>Boxing: {Math.round(sessionObject.Boxing / days)}<span className='text-base p-1'>mins per day</span></div> : ''}
-						<button className={buttonClass} onClick={toggleChartDisplay}>Chart</button>
+
 				  	</div>)
 			  	:
 			    currentDataCat > 1 ?	 
@@ -116,7 +109,6 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 						{ strengthObject.Presses > 0 ? <div className={divClass}>Presses: {Math.round(strengthObject.Presses / days)}<span className='text-base p-1'>per day</span></div> : ''}
 						{ strengthObject.Curls > 0 ? <div className={divClass}>Curls: {Math.round(strengthObject.Curls / days)}<span className='text-base p-1'>per day</span></div> : ''}
 						{ strengthObject.Crunches > 0 ? <div className={divClass}>Crunches: {Math.round(strengthObject.Crunches / days)}<span className='text-base p-1'>per day</span></div> : ''}
-						<button className={buttonClass} onClick={toggleChartDisplay}>Chart</button>
 				  	</div>)
 				:   
 					(<div className={dataContainer}>
@@ -126,7 +118,6 @@ const DataAverages = ({strengthObject, cardioObject, sessionObject, days}) => {
 						{ cardioObject.Cycling > 0 ? <div className={divClass}>Cycling: {Math.round(cardioObject.Cycling / days)}<span className='text-base p-1'>km</span></div> : ''}
 						{ cardioObject.Rope> 0 ? <div className={divClass}>Rope : {Math.round(cardioObject.Rope / days)}<span className='text-base p-1'>km</span></div> : ''}
 						{ cardioObject.Walking > 0 ? <div className={divClass}>Walking: {Math.round(cardioObject.Walking / days)}<span className='text-base p-1'>km</span></div> : ''}
-						<button className={buttonClass} onClick={toggleChartDisplay}>Chart</button>
 				  </div>)
 
  			:   

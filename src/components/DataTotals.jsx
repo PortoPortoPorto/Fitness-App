@@ -7,7 +7,8 @@ const DataTotals = ({strengthObject, cardioObject, sessionObject}) => {
 	const [ chartDisplay, setChartDisplay ] = useState(false);
 	const [ barChartArray, setBarChartArray ] = useState('');
 
-
+	console.log(strengthObject);
+	
 	const toggleChartDisplay = () => {
 	    createChartObjects(currentDataCat);
 	    if(chartDisplay === false)setChartDisplay(true);
