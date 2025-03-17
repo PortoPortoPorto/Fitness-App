@@ -17,9 +17,9 @@ const LogHeader = ({ dropdown, setDropdown }) => {
 
 	return (		
 		<>
-		  <div className='flex items-center justify-start h-28'>
+		  <div className='flex items-center justify-center h-[90px]'>
 			<h3 className='font-semibold text-xl text-blue-100 p-3 border-b-2 border-blue-200 
-						   flex items-center justify-center w-[60%] ml-[20%]'>Log your workout</h3>
+						   flex items-center justify-center w-[50%]'>Log your workout</h3>
 			{ dropdown === true ?
 			<div className='flex flex-col w-[18%] ml-[2%] h-[115px] bg-blue-300 rounded-b-lg lg:hidden'>
 				<button className= 'h-[50px] bg-blue-300 mt-1 md:text-lg text-blue-100 font-semibold border border-blue-200 rounded-md m-1 hover:bg-blue-200'

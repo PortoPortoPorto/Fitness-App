@@ -24,15 +24,15 @@ const Logbody = ({ dropdown, setDropdown }) => {
 	return (
 		<>{/* View Daily Log / Data Select Options / Data View Options*/}
 		 	{currentView === 'byDate' ? (		
-				  <div className='h-[1000px] bg-blue-400 shadow-md md:h-[720px]'> 
+				  <div className='h-[1000px] bg-blue-400 shadow-md md:h-[747px]'> 
 					<LogHeader dropdown={dropdown} setDropdown={setDropdown}/>
 					<div className='flex flex-row md:flex md:flex-col justify-center'>
-						<div className='h-[800px] flex flex-col justify-around m-[2px] sm:m-4 md:flex md:flex-row md:h-[280px]'>
+						<div className='h-[800px] flex flex-col justify-around m-[2px] sm:m-2 md:flex md:flex-row md:h-[50%]'>
 							<LogCardio/>
 							<LogStrength/>
 							<LogSessions/>
 						</div>
-						<div className='h-[800px] flex flex-col justify-around m-[2px] sm:m-4 md:flex md:flex-row md:h-[280px]'>
+						<div className='h-[800px] flex flex-col justify-around m-[2px] sm:m-2 md:flex md:flex-row md:h-[50%]'>
 							<LoggedCardio/>
 							<LoggedStrength/>
 							<LoggedSessions/>
